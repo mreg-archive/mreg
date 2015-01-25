@@ -1,0 +1,26 @@
+<table class="mreg-table-simple">
+    <thead>
+	    <tr>
+		    <th>Nummer</th>
+		    <th>datum</th>
+		    <th>ocr</th>
+		    <th>summa</th>
+		    <th>text</th>
+	    </tr>
+    </thead>
+    <tbody>
+        {{each(index, invoice) invoices}}
+		    <tr>
+			    <td>
+			        <a href="${invoice.links.edit}" class="getlink">
+			            ${invoice.id}
+			        </a>
+			    </td>
+			    <td>${invoice.tBilled}</td>
+			    <td>${invoice.ocr}</td>
+			    <td>${invoice.amount}</td>
+			    <td>${invoice.description}</td>
+		    </tr>
+	    {{/each}}
+    </tbody>
+</table>

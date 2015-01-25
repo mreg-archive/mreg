@@ -1,0 +1,100 @@
+<ul class="mreg-section-float">
+    <h2>Kontakt</h2>
+    <!-- mails -->
+    {{each(index, mailaddr) mails}}
+        <li>
+            <label>${mailaddr.name}</label>
+            <a class="mreg-delete-contact"
+               title="Radera ${mailaddr.name}"
+               href="${mailaddr.links.edit}"
+               data-name="${mailaddr.name}"
+               >
+               [radera]
+            </a>
+            <a class="mreg-edit-contact"
+               title="Redigera ${mailaddr.name}"
+               href="${mailaddr.links.edit}"
+               data-name="${mailaddr.name}"
+               >
+               [redigera]
+            </a>
+            <a href="mailto:${mailaddr.mail}"
+               class="mreg-strong"
+               title="Skicka mail till ${mailaddr.mail}"
+               >
+               ${mailaddr.mail}
+            </a>
+            {{if mailaddr.valid}}
+                <span class="ui-icon mreg-icon-valid"   
+                      title="Giltig för at skicka mail" />
+            {{else}}
+                <span class="ui-icon mreg-icon-error"
+                      title="Ej giltig för at skicka mail" />
+            {{/if}}
+        </li>
+    {{/each}}
+    <!-- end mails -->
+
+    <!-- phones -->
+    {{each(index, phone) phones}}
+        <li>
+            <label>${phone.name}</label>
+            <a class="mreg-delete-contact"
+               title="Radera ${phone.name}"
+               href="${phone.links.edit}"
+               data-name="${phone.name}"
+               >
+               [radera]
+            </a>
+            <a class="mreg-edit-contact"
+               title="Redigera ${phone.name}"
+               href="${phone.links.edit}"
+               data-name="${phone.name}"
+               >
+               [redigera]
+            </a>
+            <span class="mreg-strong mreg-float">
+                  ${phone.nr}
+            </span>
+            {{if phone.mobile}}
+                <span class="ui-icon mreg-icon-valid"   
+                      title="Giltig för at skicka SMS" />
+            {{else}}
+                <span class="ui-icon mreg-icon-error"
+                      title="Ej giltig för at skicka SMS" />
+            {{/if}}
+        </li>
+    {{/each}}
+    <!-- end phones -->
+
+    <!-- addresses -->
+    {{each(index, addr) addresses}}
+        <li>
+            <label>${addr.name}</label>
+            <a class="mreg-delete-contact"
+               title="Radera ${addr.name}"
+               href="${addr.links.edit}"
+               data-name="${addr.name}"
+               >
+               [radera]
+            </a>
+            <a class="mreg-edit-contact"
+               title="Redigera ${addr.name}"
+               href="${addr.links.edit}"
+               data-name="${addr.name}"
+               >
+               [redigera]
+            </a>
+            <span class="mreg-strong">${addr.town}</span>
+        </li>
+    {{/each}}
+    <!-- end addresses -->
+
+    <button class="mreg-button mreg-create-contact"
+            data-addresses="${links['/mreg/rels/addresses']}"
+            data-phones="${links['/mreg/rels/phones']}"
+            data-mails="${links['/mreg/rels/mails']}"
+            >
+            Ny kontakt
+    </button>
+</ul>

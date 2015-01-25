@@ -1,0 +1,38 @@
+{
+    "name": "itbz/cache",
+    "description": "PHP data cache abstraction library",
+    "keywords": ["APC", "XCache"],
+    "homepage": "https://github.com/itbz/Cache",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hannes Forsgård",
+            "email": "hannes.forsgard@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "itbz\\Cache": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
+        "NSinopoli/VisualPHPUnit": "*"
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "NSinopoli/VisualPHPUnit",
+                "version": "1.0.0",
+                "dist": {
+                    "url": "https://github.com/NSinopoli/VisualPHPUnit/zipball/master",
+                    "type": "zip"
+                }
+            }
+        }
+    ]
+}

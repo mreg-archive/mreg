@@ -1,0 +1,93 @@
+<VirtualHost *:80>
+    ServerName mreg.local
+    DocumentRoot /mreg/www
+    ServerSignature Off
+
+    ## Defaults ##
+    <Directory />
+        Options FollowSymLinks
+        AllowOverride None
+        Order allow,deny
+        allow from all
+    </Directory>
+
+
+    ## Main service    ##
+    <Directory /mreg/www>
+        ## service settings unique to mreg.local ##
+        php_value error_log /mreg/var/log/php_errors.log
+        php_value open_basedir /mreg/:/tmp/:
+        php_value session.cookie_path /
+        php_value session.referer_check http://mreg.local/jsclient/
+        php_flag session.cookie_secure off
+
+        ## debug settings ##
+        php_flag html_errors on
+        php_value xdebug.collect_params 3
+        php_flag xdebug.show_local_vars on
+        php_flag xdebug.collect_return on
+        php_flag assert.active on
+        php_flag assert.warning on
+        php_flag assert.bail on
+        php_flag display_errors on
+        php_flag display_startup_errors on
+        php_value error_reporting -1
+        php_flag session.bug_compat_42 on
+        php_flag session.bug_compat_warn on
+
+        # Lägg denna rad i .htaccess när systemet är nere för service...
+        # SetEnv RETRY_AFTER '2012-03-13 24:00:00'
+
+        ## rewrites ##
+        RewriteEngine On
+
+        #Redirect to site misc
+        RewriteRule robots\.txt$ static/robots.txt [L] 
+        RewriteRule favicon\.ico$ static/favicon.ico [L] 
+
+        #Redirect all html requests to jsclient
+        #RewriteCond %{HTTP_ACCEPT} text/html
+        #RewriteRule ^.*$ /jsclient/ [R,L]
+
+        #Redirect to main service
+        RewriteCond %{REQUEST_URI} !=gateway.php
+        RewriteRule ^.*$ gateway.php [L]
+    </Directory>
+
+
+    ## Javascript client ##
+    <Directory /mreg/www/jsclient>
+        Options FollowSymlinks
+
+        #No caching during development
+        Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
+
+        RewriteEngine Off
+        DirectoryIndex index.html
+    </Directory>
+
+
+    ## Static content ##
+    <Directory /mreg/www/static>
+        Options -FollowSymlinks
+        RewriteEngine Off
+    </Directory>
+
+
+    ## Build statistics ##
+    <Directory /mreg/www/build>
+        RewriteEngine Off
+        Options FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        allow from all
+    </Directory>
+
+
+    ## Logs ##
+    ErrorLog /mreg/var/log/error.log
+    LogLevel notice
+    CustomLog /mreg/var/log/access.log combined
+</VirtualHost>

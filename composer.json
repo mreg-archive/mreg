@@ -1,0 +1,64 @@
+{
+    "name": "mreg/ḿreg",
+    "description": "Trade union registry",
+    "license": "AGPL-3.0",
+    "authors": [
+        {
+            "name": "Hannes Forsgård"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "itbz/httpio": "dev-master",
+        "itbz/cache": "dev-master",
+        "itbz/utils": "dev-master",
+        "itbz/datamapper": "2.*",
+        "itbz/phplibphone": "dev-master",
+        "itbz/phplibaddress": "dev-master",
+        "itbz/libmergepdf": "2.*",
+        "itbz/stb": "dev-master",
+        "monolog/monolog": "1.1.*",
+        "emberlabs/gravatarlib": "dev-master",
+        "twig/twig": "1.*",
+        "swiftmailer/swiftmailer": "4.1.*",
+        "Aura/Router": "dev-master",
+        "Aura/Cli": "dev-master",
+        "AddedBytes/EmailAddressValidator": "*",
+        "pimple/pimple": "1.*",
+        "rych/phpass": "2.0.1"
+    },
+    "config": {
+        "vendor-dir": "libs"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        },
+        "classmap": [
+            "libs/AddedBytes/EmailAddressValidator",
+            "libs/emberlabs/gravatarlib/emberlabs/gravatarlib"
+        ]
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/itbz/Aura.Cli"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/itbz/Aura.Router"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "AddedBytes/EmailAddressValidator",
+                "version": "1.0.0",
+                "source": {
+                    "url": "http://php-email-address-validation.googlecode.com/svn/",
+                    "type": "svn",
+                    "reference":  "trunk/"
+                }
+            }
+        }
+    ]
+}

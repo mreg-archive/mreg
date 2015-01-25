@@ -1,0 +1,48 @@
+## SYSTEM OFFLINE UNTIL
+## SetEnv RETRY_AFTER '2012-03-13 24:00:00'
+
+php_value error_log APP_ROOT/var/log/php_errors.log
+php_value open_basedir APP_ROOT/:/tmp/:
+php_value session.cookie_path /
+#php_value session.referer_check http://url/to/jsclient/
+php_value post_max_size 8M
+
+## DEBUG SETTINGS
+php_flag session.cookie_secure off
+php_flag html_errors on
+php_value xdebug.collect_params 3
+php_flag xdebug.show_local_vars on
+php_flag xdebug.collect_return on
+php_flag assert.active on
+php_flag assert.warning on
+php_flag assert.bail on
+php_flag display_errors on
+php_flag display_startup_errors on
+php_value error_reporting -1
+php_flag session.bug_compat_42 on
+php_flag session.bug_compat_warn on
+
+## PRODUCTION SETTINGS
+## php_flag session.cookie_secure on
+## php_flag assert.active off
+## php_flag display_errors off
+## php_flag display_startup_errors off
+## php_flag html_errors off
+## php_value error_reporting 22519
+## php_flag session.bug_compat_42 off
+## php_flag session.bug_compat_warn off
+
+Options -Indexes
+Options +FollowSymlinks
+RewriteEngine On
+
+RewriteRule robots\.txt$ static/robots.txt [L] 
+RewriteRule favicon\.ico$ static/favicon.ico [L] 
+
+## REDIRECT ALL HTML REQUEST TO JSCLIENT
+## RewriteCond %{HTTP_ACCEPT} text/html
+## RewriteRule ^.*$ /jsclient/ [R,L]
+
+## REDIRECT TO MAIN SERVICE
+RewriteCond %{REQUEST_URI} !=gateway.php
+RewriteRule ^.*$ gateway.php [L]

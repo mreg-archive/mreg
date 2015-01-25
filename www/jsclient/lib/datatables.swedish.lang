@@ -1,0 +1,16 @@
+{
+	"sProcessing":   "Laddar...",
+	"sLengthMenu":   "Visa _MENU_ rader per sida",
+	"sZeroRecords":  "<em>Inga matchande resultat funna</em>",
+	"sInfo":         "Visar _START_ till _END_ av totalt _TOTAL_ rader",
+	"sInfoEmpty":    "Visar 0 till 0 av totalt 0 rader",
+	"sInfoFiltered": "(filtrerade från _MAX_ rader)",
+	"sInfoPostFix":  "",
+	"sSearch":       "Filtrera synliga:",
+	"oPaginate": {
+		"sFirst":    "första",
+		"sPrevious": "föregående",
+		"sNext":     "nästa",
+		"sLast":     "sista"
+	}
+}

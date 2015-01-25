@@ -1,0 +1,35 @@
+<table class="mreg-table-simple">
+    <thead>
+	    <tr>
+		    <th>Grupp</th>
+		    <th>från datum</th>
+		    <th>till datum</th>
+		    <th>status</th>
+		    <th>kommentar</th>
+	    </tr>
+    </thead>
+    <tbody>
+        {{each(index, item) items}}
+		    <tr>
+			    <td>
+			        <a class="getlink" href="${item.links.self}" title="Öppna">
+			            ${item.name}
+			        </a>
+			    </td>
+			    <td>
+			        <time datetime="${item.xref.tSince}">
+			            ${item.xref.tSince}
+			        </time>
+			    </td>
+			    <td>
+			        <time datetime="${item.xref.tUnto}">
+			            ${item.xref.tUnto}
+			        </time>
+			    </td>
+			    <td>${item.xref.state}</td>
+			    <td>${item.xref.stateComment}</td>
+		    </tr>
+	    {{/each}}
+    </tbody>
+</table>
+

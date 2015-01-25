@@ -1,0 +1,49 @@
+<form class="mreg-edit-dialog mreg-validate">
+    <input type="hidden" name="etag" value="${etag}" />
+    <input type="hidden" name="link" value="${links.edit}" />
+    <input type="hidden" name="title" value="${name}" />
+
+    <div>
+        {{if valid}}
+            <span class="ui-icon mreg-icon-valid" />
+            &nbsp;Giltig för att skicka mail
+        {{else}}
+            <span class="ui-icon mreg-icon-error" />
+            &nbsp;Ej giltig för att skicka mail
+        {{/if}}
+    </div>
+
+    <!-- meta -->
+    <div>
+        <label>Kontaktid</label>
+        <input type="text" value="${name}" name="name"
+            data-bvalidator="required,alphanum,maxlength[50]" />
+        <br />
+        <label>Tekniskt id</label>
+        <span class="mreg-strong">${id}</span>
+        <br />
+        <label>Skapad</label>
+        <time class="mreg-strong" datetime="${tCreated}">${tCreated}</time>
+        <br />
+        <label>Validerad</label>
+        <time class="mreg-strong" datetime="${tModified}">${tModified}</time>
+        av <a href="${modifiedBy.link}"
+            class="mreg-strong getlink">${modifiedBy.name}</a>
+        (spara för att validera)
+    </div>
+    <!-- end meta -->
+
+    <div>
+        <label>Mail</label>
+        <input type="text" value="${mail}" name="mail"
+            data-bvalidator="required,email,maxlength[200]" />
+    </div>
+
+    <!-- revisions -->
+    <strong>Ändringar</strong>
+    <button class="mreg-button mreg-toggle-section">+</button>
+    <div class="mreg-section mreg-hidden">
+        {{tmpl($data) "tmpl/table-revisions.html"}}
+    </div>
+    <!-- end revisions -->
+</form>

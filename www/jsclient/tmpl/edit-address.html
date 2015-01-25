@@ -1,0 +1,104 @@
+<form class="mreg-edit-dialog mreg-validate">
+    <input type="hidden" name="etag" value="${etag}" />
+    <input type="hidden" name="link" value="${links.edit}" />
+    <input type="hidden" name="title" value="${name}" />
+
+    <pre>${rendered}</pre>
+
+    <!-- meta -->
+    <div>
+        <label>Kontaktid</label>
+        <input type="text" value="${name}" name="name"
+            data-bvalidator="required,alphanum,maxlength[50]" />
+        <br />
+        <label>Tekniskt id</label> <span class="mreg-strong">${id}</span>
+        <br />
+        <label>Skapad</label>
+        <time class="mreg-strong" datetime="${tCreated}">${tCreated}</time>
+        <br />
+        <label>Validerad</label>
+        <time class="mreg-strong" datetime="${tModified}">${tModified}</time>
+        av <a href="${modifiedBy.link}" class="mreg-strong getlink">
+            ${modifiedBy.name}</a>
+        (spara för att validera)
+    </div>
+    <!-- end meta -->
+
+    <div class="wider">
+        Förmedlande mottagare (care of)
+        <button class="mreg-button mreg-toggle-section">+</button>
+        <div class="mreg-section mreg-hidden">
+            <label>Mottagarrolluppgift</label>
+            <input type="text" value="${mailee_role_descriptor}"
+                name="mailee_role_descriptor" data-bvalidator="maxlength[3]" />
+            <br />
+            <label>Mottagare</label>
+            <input type="text" value="${mailee}" name="mailee"  
+                data-bvalidator="maxlength[32]" />
+        </div>
+    </div>
+
+    <div class="wider">
+        Administrativ adress (box)
+        <button class="mreg-button mreg-toggle-section">+</button>
+        <div class="mreg-section mreg-hidden">
+            <label>Typ</label>
+            <input type="text" value="${delivery_service}"
+                name="delivery_service" data-bvalidator="maxlength[30]" />
+            <br />
+            <label>Administrativ adress</label>
+            <input type="text" value="${alternate_delivery_service}"
+                name="alternate_delivery_service" data-bvalidator="maxlength[5]" />
+        </div>
+    </div>
+
+    <div class="wider">
+        <label>Gata</label>
+        <input type="text" value="${thoroughfare}" name="thoroughfare"
+            data-bvalidator="maxlength[36]" />
+        <br />
+        <label>Nummber</label>
+        <input type="text" value="${plot}" name="plot"
+            data-bvalidator="digit,maxlength[9]" />
+        <br />
+        <label>Bokstav</label>
+        <input type="text" value="${littera}" name="littera"
+            data-bvalidator="alpha,maxlength[2]"  />
+        <br />
+        <label>Uppgång</label>
+        <input type="text" value="${stairwell}" name="stairwell"
+            data-bvalidator="maxlength[3]"  />
+        <br />
+        <label>Våning</label>
+        <input type="text" value="${floor}" name="floor"
+            data-bvalidator="maxlength[7]"  />
+        <br />
+        <label>Lägenhetsnummer</label>
+        <input type="text" value="${door}" name="door"
+            data-bvalidator="digit,maxlength[4]" />
+        <br />
+        <label>Extra uppgift</label>
+        <input type="text" value="${supplementary_delivery_point_data}"
+            name="supplementary_delivery_point_data" data-bvalidator="maxlength[36]" />
+        <br />
+        <label>Postnummer</label>
+        <input type="text" value="${postcode}" name="postcode"
+            data-bvalidator="maxlength[6]" />
+        <br />
+        <label>Postort</label>
+        <input type="text" value="${town}" name="town"
+            data-bvalidator="maxlength[29]" />
+        <br />
+        <label>Landskod</label>
+        <input type="text" value="${country_code}" name="country_code"
+            data-bvalidator="alpha,maxlength[2],minlength[2]"  />
+    </div>
+
+    <!-- revisions -->
+    <strong>Ändringar</strong>
+    <button class="mreg-button mreg-toggle-section">+</button>
+    <div class="mreg-section mreg-hidden">
+        {{tmpl($data) "tmpl/table-revisions.html"}}
+    </div>
+    <!-- end revisions -->
+</form>

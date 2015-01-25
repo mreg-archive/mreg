@@ -1,0 +1,24 @@
+<table class="mreg-factions-table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Grupp</th>
+            <th>Id</th>
+            <th>Typ</th>
+            <th>Url</th>
+            <th>Beskrivning</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{each(index, faction) factions}}
+            <tr>
+                <td></td>
+                <td>${faction.title}</td>
+                <td>${faction.id}</td>
+                <td>${faction.type}</td>
+                <td>${faction.links.edit}</td>
+                <td>${faction.description}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

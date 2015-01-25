@@ -1,0 +1,121 @@
+<section class="mreg-entity">
+    <input type="hidden"
+           name="mreg-entity-title"
+           value="${title}" />
+    <input type="hidden"
+           name="mreg-entity-id"
+           value="${uname}" />
+    <input type="hidden"
+           name="mreg-entity-type"
+           value="${type}" />
+    <input type="hidden"
+           name="mreg-entity-uri"
+           value="${links.edit}" />
+    <input type="hidden"
+           name="mreg-entity-description"
+           value="${notes}" />
+
+
+    <!-- avatar -->
+    <div class="avatar ui-widget-content">
+       <div></div>
+    </div>
+    <!-- end avatar -->
+
+    <!-- header -->
+    <header>
+        <h1>
+            <span class="name">${title}</span>
+        </h1>
+
+        <div>
+            <em>${fullname}</em>
+        </div>
+
+        <div>
+            <span class="mreg-error">${status}</span>
+        </div>
+
+        <div class="mreg-section mreg-hidden">
+            {{tmpl($data) "tmpl/list-meta.html"}}
+        </div>
+
+        <button class="mreg-button mreg-toggle-section">+</button>
+    </header>
+    <!-- end header -->
+
+
+    <div style="clear:both;">&nbsp;</div>
+
+
+    <!-- info -->
+    <ul class="mreg-section-float">
+        <h2>Info</h2>
+        <li>
+            <label>Antal inlogg</label>
+            <span class="mreg-strong">${validAuths}</span>
+        </li>
+        <li>
+            <label>Senast aktiv</label>
+            <span class="mreg-strong"><time datetime="${lastLogin}">${lastLogin}</time></span>
+        </li>
+        {{if accountingFor}}
+            <li>
+                <label>Bokför åt</label>
+                <span class="mreg-strong">${accountingFor}</span>
+            </li>
+        {{/if}}
+    </ul>
+    <!-- end info -->
+
+
+    <!-- notes -->
+    <div class="mreg-section-float">
+        <h2>Anteckningar</h2>
+        <div class="mreg-strong mreg-textarea">
+        {{if notes}}
+            ${notes}
+        {{else}}
+            <em>Anteckningar saknas</em>
+        {{/if}}
+        </div>
+    </div>
+    <!-- end notes -->
+
+
+    <!-- content row -->
+    <div class="mreg-content-row">
+
+        <!-- sys_groups -->
+        <div>
+            <h2>Systemgrupper</h2>
+            <button class="mreg-button mreg-float-parent mreg-toggle-section">
+                +
+            </button>
+            <div class="mreg-section mreg-hidden">
+                <table class="mreg-table-simple">
+                    <thead>
+                        <tr>
+                            <th>
+                                Systemgrupper
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{each(key, group) groups}}
+                            <tr>
+                                <td>
+                                    ${group}
+                                </td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end sys_groups -->
+
+    </div>
+    <!-- end content row -->
+
+</section>

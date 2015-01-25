@@ -1,0 +1,48 @@
+<form class="mreg-edit-dialog mreg-validate">
+    <input type="hidden" name="etag" value="${etag}" />
+    <input type="hidden" name="link" value="${links.edit}" />
+    <input type="hidden" name="title" value="${title}" />
+
+    <div class="wider">
+        <label>Användarnamn</label>
+        <input type="text" value="${uname}" name="uname"
+            data-bvalidator="required,alphanum,maxlength[10]" />
+        <br />
+        <label>Fullständigt namn</label>
+        <input type="text" value="${fullname}" name="fullname"
+            data-bvalidator="required,alphanum,maxlength[200]" />
+    </div>
+
+    <div class="wider">
+        <label>Grupper</label>
+        <input type="text" value="${groups}" name="groups"
+            data-bvalidator="maxlength[200]" />
+        <br />
+        <label>Bokför åt</label>
+        <input type="text" value="${accountingFor}" name="accountingFor"
+            data-bvalidator="digit,maxlength[10]" />
+    </div>
+
+    <div>
+        <label>Status</label>
+        <select name="status">
+            <option value="ignore">lämna oförändrad</option>
+            <option value="block">blockera användaren</option>
+            <option value="activate">aktivera användaren</option>
+        </select>
+    </div>
+
+    <div class="wider">
+        <label>Nytt lösenord</label>
+        <input type="password" name="newPswdA"/>
+        <label>Upprepa lösenord</label>
+        <input type="password" name="newPswdB"/><br/>
+        <!--label>Generera</label>
+        <input type="checkbox" name="genPswd"/-->
+    </div>
+
+    <div>
+        <label>Anteckning</label>
+        <textarea name="notes">${notes}</textarea>
+    </div>
+</form>

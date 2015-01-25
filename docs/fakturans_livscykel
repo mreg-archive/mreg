@@ -1,0 +1,40 @@
+Fakturans livscykel
+===================
+
+I diskussionerna som var här på listan för några veckor sedan om fakturor och OCR-nummer kom det upp några för mig nya scenarier:
+
+1) Registret måste kunna hantera medlemsfakturor med öppna belopp, för medlemmar som byter avgiftsklass ofta.
+
+2) Registret måste kunna hantera medlemsinbetalningar som är för stora eller för små (jag kan inte lita på att beloppet är låst till ocr).
+
+3) Överskottet i en för stor inbetalning ska bokföras på något speciellt konto, exempelvis som en gåva.
+
+Utifrån detta har jag delivs tänkt om hur medlemsfakturor ska hanteras av registret. Nu ska jag försöka beskriva hur jag ser livscykeln för en faktura, så kan ni komma med fler synpunkter och förbättringar. Det blir ganska långt, jag försöker vara så pedagogisk jag kan..
+
+1) Varje LS har en avgiftstabell, precis som i dagsläget. För varje avgiftsklass anges inkomstintervall och avgift. Även hur avgiften ska delas upp mellan olika delar av organisationen ingår i tabellen. X kr är LS-avgift, Y kr är çentral avgift, Z kr ska avsättas till stridfonden osv.. Inga konstigheter.
+
+2) Varje LS har också en kontoplan. De delar en avgift delas upp i motsvaras av ett konto i kontoplanen. Alltså LS-avgifter får i kontoplanen ett bokföringskonto, centrala avgifter ett annat osv. På detta sätt kan en betald medlemsavgift brytas upp och bokföras på olika konton. Kontoplanen innehåller även uppgift om vilket konto själva inbetalningen ska bokföras på (alltså vilket bokföingskonto som motsvarar bankkontot) (här kan vi också tänka oss en uppdelning mellan PG, BG och AG, för de LS som exempelvis tar emot autogiroinbetalningar till ett separat bankkonto). Kontoplanen innehåller även uppgift om ett rest-konto, ett konto dit summor som överstiger medlemsavgiften bokförs. Samt ett skuld-konto. Mer om detta senare.
+
+3) När medlemsfakturor ska genereras hämtas medlemmens avgiftsklass (antingen från medlemmens inmatade månadslön, om det inte går från tidigare avgiftsklass) och en faktura med ett unikt ocr-nummer skapas. Ocr-nummret innehåller checksiffra för summan, men det är upp till varje LS avtal med sin bank om denna checksiffra ska kontrolleras eller inte.
+
+4) För medlemmar som byter avgiftsklass ofta genereras en speciell blanco-faktura. Blanco-fakturor innehåller ingen summa, utan när en betalning görs hämtas avgiftsklass genom att den inbetalda summan avrundas nedåt.
+
+5) Fakturan skickas till medlem, hur detta sker varier med hur medlemmen vill betala. Via mail, vanlig post eller autogiro-fil till banken. Medlemmen betalar.
+
+6) Medlemmarnas betalningar prickas av mot faktura-registret. Antingen manuellt eller genom automatisk inläsning av filer från Plus-/Bank- /Autogiro.
+
+7) Betalda fakturor kan sedan exporteras till bokföringen med hjälp av kontoplanen. Summor som överstiger medlemsavgiften bokförs på kontoplanens rest-konto. Hur detta konto ska administreras (om det ska ses som en gåva eller inte) är upp till varje LS. Registret innehåller inte funktioner för att till exempel se hur stora avsättningar som gjorts till stridfond denna månad. Frågor av denna typ fås genon att importera data från registret till något bokförings- program. Det är alltså mer eller mindre nödvändigt att registret används i kombination med ett ordentligt bokföringsprogram.
+
+8) Inbetalningar som understiger medlemsavgiften är mer komplicerade. Dessa fakturor vill jag att registret markerar som betalda, trots att de endast är delbetalda. I export till bokföring bokförs den saknade summan som en fordring på medlemmen. LS-avgift, central avgift osv. bokförs som om hela avgiften betalades. En ny faktura genereras sedan för den återstående summan. Denna faktura får ett nytt ocr-nummer och bokförs mot skuld-kontot (som givetvis fås från kontoplanen) när den betalas.
+
+Anledningarna att jag vill att alla faklturor antingen ska vara betalda eller obetalda (aldrig delbetalda) är tekniska:
+
+- Dels vill jag kunna markera vilka fakturor som exporterats till bokföringen, detta blir komplicerat om en faktura endast är delbetald.
+
+- Dels skulle det vara svårt att veta vad som ska bokföras som LS-avgift osv. på en delbetald faktura. De olika delavgifterna är ju inte en procent av hela summan, de är fasta summor.
+
+- Dels kan en medlem med skuld-fakturor på detta sätt enkelt byta till/från de olika betalningssätten. Det skulle vara komplicerat att exportera en faktura till bokföringen ifall den betalats via olika kanaler (säg halva Bankgiro halva Autogiro) och de olika kanalerna ska motsvaras av olika konton i bokföringen.
+
+9) En blanco-faktura som betalas med en summa som understiger den lägsta avgiftsklassen genererar en fordring på medlemmen för att komma upp i den lägsta klassen.
+
+10) Jag är inte helt klar med hur fordringar ska avskrivas. Antagligen genom att de helt enkelt tas bort från registret, och bokförs som avskrivna manuellt i bokföringsprogrammet. Alternativt att registret innehåller en avskrivningsfunktion där avskrivningar kan exporteras.

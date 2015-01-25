@@ -1,0 +1,861 @@
+[
+    {
+        "name": "itbz/Cache",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/itbz/Cache.git",
+            "reference": "1.2.3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/itbz/Cache/zipball/1.2.3",
+            "reference": "1.2.3",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "nsinopoli/visualphpunit": "*"
+        },
+        "time": "2012-10-02 06:53:42",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "itbz\\Cache": "src/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Hannes Forsgård",
+                "email": "hannes.forsgard@gmail.com"
+            }
+        ],
+        "description": "PHP data cache abstraction library",
+        "homepage": "https://github.com/itbz/Cache",
+        "keywords": [
+            "apc",
+            "xcache"
+        ]
+    },
+    {
+        "name": "itbz/datamapper",
+        "version": "2.0.0",
+        "version_normalized": "2.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/itbz/datamapper.git",
+            "reference": "2.0.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/itbz/datamapper/zipball/2.0.0",
+            "reference": "2.0.0",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2012-10-04 05:53:59",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "itbz\\datamapper": "src/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Hannes Forsgård",
+                "email": "hannes.forsgard@gmail.com"
+            }
+        ],
+        "description": "Generic data mapper",
+        "homepage": "https://github.com/itbz/datamapper",
+        "keywords": [
+            "data mapper",
+            "mapper"
+        ]
+    },
+    {
+        "name": "itbz/country-list",
+        "version": "0.1.0",
+        "version_normalized": "0.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/itbz/country-list.git",
+            "reference": "0.1.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/itbz/country-list/zipball/0.1.0",
+            "reference": "0.1.0",
+            "shasum": ""
+        },
+        "time": "2012-09-17 10:54:28",
+        "type": "library",
+        "installation-source": "dist",
+        "description": "List of all countries with names and ISO 3166-1 codes in all languages and data formats.",
+        "homepage": "https://github.com/itbz/country-list"
+    },
+    {
+        "name": "itbz/phpcountry",
+        "version": "0.2.1",
+        "version_normalized": "0.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/itbz/phpcountry.git",
+            "reference": "0.2.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/itbz/phpcountry/zipball/0.2.1",
+            "reference": "0.2.1",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "itbz/country-list": "0.1.*"
+        },
+        "time": "2012-10-03 06:46:31",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "itbz\\phpcountry": "src/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Hannes Forsgård",
+                "email": "hannes.forsgard@gmail.com"
+            }
+        ],
+        "description": "Get localized country names from ISO 3166-1 codes",
+        "homepage": "https://github.com/itbz/phpcountry",
+        "keywords": [
+            "ISO 3166",
+            "Country names"
+        ]
+    },
+    {
+        "name": "itbz/phplibphone",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/itbz/phplibphone.git",
+            "reference": "0.1.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/itbz/phplibphone/zipball/0.1.1",
+            "reference": "0.1.1",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "itbz/phpcountry": ">=0.2.0"
+        },
+        "time": "2012-10-03 07:58:09",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "itbz\\phplibphone": "src/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Hannes Forsgård",
+                "email": "hannes.forsgard@gmail.com"
+            }
+        ],
+        "description": "Parse phone numbers",
+        "homepage": "https://github.com/itbz/phplibphone",
+        "keywords": [
+            "phone"
+        ]
+    },
+    {
+        "name": "itbz/phplibaddress",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/itbz/phplibaddress.git",
+            "reference": "0.1.2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/itbz/phplibaddress/zipball/0.1.2",
+            "reference": "0.1.2",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "itbz/phpcountry": ">=0.2.0"
+        },
+        "time": "2012-10-03 07:30:32",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "itbz\\phplibaddress": "src/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Hannes Forsgård",
+                "email": "hannes.forsgard@gmail.com"
+            }
+        ],
+        "description": "Model postal addresses as of Swedish standard SS 613401:2011 ed. 3",
+        "homepage": "https://github.com/itbz/phplibaddress",
+        "keywords": [
+            "postal address"
+        ]
+    },
+    {
+        "name": "itbz/fpdf",
+        "version": "1.7.1",
+        "version_normalized": "1.7.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/itbz/fpdf.git",
+            "reference": "1.7.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/itbz/fpdf/zipball/1.7.1",
+            "reference": "1.7.1",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2012-05-18 00:06:51",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "fpdf": "src/"
+            }
+        },
+        "description": "Unofficial PSR-0 compliant version of the FPDF library",
+        "homepage": "http://www.fpdf.org/"
+    },
+    {
+        "name": "itbz/fpdi",
+        "version": "1.4.2",
+        "version_normalized": "1.4.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/itbz/fpdi.git",
+            "reference": "1.4.2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/itbz/fpdi/zipball/1.4.2",
+            "reference": "1.4.2",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "itbz/fpdf": "1.7.*"
+        },
+        "time": "2012-05-13 01:52:21",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "fpdi": "src/"
+            }
+        },
+        "description": "Unofficial PSR-0 compliant version of the FPDI library"
+    },
+    {
+        "name": "itbz/libmergepdf",
+        "version": "2.0.0",
+        "version_normalized": "2.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/itbz/libmergepdf.git",
+            "reference": "2.0.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/itbz/libmergepdf/zipball/2.0.0",
+            "reference": "2.0.0",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "itbz/fpdi": "1.4.*"
+        },
+        "time": "2012-10-02 12:44:33",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "itbz\\libmergepdf": "src/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Hannes Forsgård",
+                "email": "hannes.forsgard@gmail.com"
+            }
+        ],
+        "description": "Library for merging multiple PDFs",
+        "homepage": "https://github.com/itbz/libmergepdf",
+        "keywords": [
+            "pdf"
+        ]
+    },
+    {
+        "name": "monolog/monolog",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Seldaek/monolog",
+            "reference": "1.1.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/Seldaek/monolog/zipball/1.1.0",
+            "reference": "1.1.0",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "mlehner/gelf-php": "1.0.*"
+        },
+        "suggest": {
+            "mlehner/gelf-php": "Allow sending log messages to a GrayLog2 server"
+        },
+        "time": "2012-04-23 16:27:40",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Monolog": "src/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jordi Boggiano",
+                "email": "j.boggiano@seld.be",
+                "homepage": "http://seld.be",
+                "role": "Developer"
+            }
+        ],
+        "description": "Logging for PHP 5.3",
+        "homepage": "http://github.com/Seldaek/monolog",
+        "keywords": [
+            "log",
+            "logging"
+        ]
+    },
+    {
+        "name": "emberlabs/gravatarlib",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "emberlabs/gravatarlib",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/emberlabs/gravatarlib.git",
+            "reference": "6bd70321aa59a8002d5fa08d9b592121683801df"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/emberlabs/gravatarlib/zipball/6bd70321aa59a8002d5fa08d9b592121683801df",
+            "reference": "6bd70321aa59a8002d5fa08d9b592121683801df",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "suggest": {
+            "twig/twig": ">=1.4.0"
+        },
+        "time": "2011-12-28 14:28:37",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "emberlabs\\gravatarlib\\": ""
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Sam Thompson",
+                "email": "sam@emberlabs.org"
+            },
+            {
+                "name": "Damian Bushong",
+                "email": "damian@emberlabs.org"
+            }
+        ],
+        "description": "A lightweight PHP 5.3 OOP library providing easy gravatar integration.",
+        "homepage": "http://emberlabs.org/",
+        "keywords": [
+            "templating",
+            "gravatar",
+            "twig"
+        ]
+    },
+    {
+        "name": "AddedBytes/EmailAddressValidator",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "svn",
+            "url": "http://php-email-address-validation.googlecode.com/svn/",
+            "reference": "trunk/"
+        },
+        "type": "library",
+        "installation-source": "source"
+    },
+    {
+        "name": "rych/phpass",
+        "version": "v2.0.1",
+        "version_normalized": "2.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/rchouinard/phpass.git",
+            "reference": "v2.0.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/rchouinard/phpass/zipball/v2.0.1",
+            "reference": "v2.0.1",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.1",
+            "ext-hash": "*"
+        },
+        "time": "2012-02-24 22:45:33",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Phpass": "library/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Ryan Chouinard",
+                "email": "rchouinard@gmail.com",
+                "homepage": "http://ryanchouinard.com"
+            }
+        ],
+        "description": "PHPass: Easy, secure password management for PHP",
+        "homepage": "https://www.github.com/rchouinard/phpass",
+        "keywords": [
+            "cryptography",
+            "password"
+        ]
+    },
+    {
+        "name": "Aura/Router",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/itbz/Aura.Router",
+            "reference": "8b05547b61b5e7b1ddafcbe3309ab39d41008aa7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/itbz/Aura.Router/zipball/8b05547b61b5e7b1ddafcbe3309ab39d41008aa7",
+            "reference": "8b05547b61b5e7b1ddafcbe3309ab39d41008aa7",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2012-05-17 21:41:37",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Aura\\Router": "src/"
+            }
+        },
+        "license": [
+            "BSD"
+        ],
+        "authors": [
+            {
+                "name": "Aura Contributors",
+                "homepage": "https://github.com/auraphp/Aura.Router/contributors"
+            }
+        ],
+        "description": "The Aura Router package implements web routing; given a URI path and a copy of $_SERVER, it will extract controller, action, and parameter values for a specific route.",
+        "homepage": "http://auraphp.github.com/Aura.Router",
+        "keywords": [
+            "route",
+            "router",
+            "routing"
+        ]
+    },
+    {
+        "name": "itbz/utils",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/itbz/utils.git",
+            "reference": "037d6a7e57727dd950abaead5defec08d17ed888"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/itbz/utils/zipball/037d6a7e57727dd950abaead5defec08d17ed888",
+            "reference": "037d6a7e57727dd950abaead5defec08d17ed888",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2012-10-04 05:06:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "itbz\\utils": "src/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Hannes Forsgård",
+                "email": "hannes.forsgard@gmail.com"
+            }
+        ],
+        "description": "PHP utility classes",
+        "homepage": "https://github.com/itbz/utils",
+        "keywords": [
+            "serialize",
+            "json",
+            "csv"
+        ]
+    },
+    {
+        "name": "swiftmailer/swiftmailer",
+        "version": "v4.1.8",
+        "version_normalized": "4.1.8.0",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/swiftmailer/swiftmailer.git",
+            "reference": "v4.1.8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/swiftmailer/swiftmailer/zipball/v4.1.8",
+            "reference": "v4.1.8",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.4"
+        },
+        "time": "2012-06-17 20:55:34",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "4.1-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "lib/swift_required.php"
+            ]
+        },
+        "license": [
+            "LGPL"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Chris Corbyn"
+            }
+        ],
+        "description": "Swiftmailer, free feature-rich PHP mailer",
+        "homepage": "http://swiftmailer.org",
+        "keywords": [
+            "mail",
+            "mailer"
+        ]
+    },
+    {
+        "name": "itbz/stb",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/itbz/Swedish-Technical-Bureaucracy.git",
+            "reference": "0.2.2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/itbz/Swedish-Technical-Bureaucracy/zipball/0.2.2",
+            "reference": "0.2.2",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2012-10-05 03:48:54",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "itbz\\stb": "src/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Hannes Forsgård",
+                "email": "hannes.forsgard@gmail.com"
+            }
+        ],
+        "description": "Swedish Technical Bureaucracy",
+        "homepage": "https://github.com/itbz/STB",
+        "keywords": [
+            "Banking",
+            "Accounting",
+            "Bureaucracy"
+        ]
+    },
+    {
+        "name": "twig/twig",
+        "version": "v1.11.1",
+        "version_normalized": "1.11.1.0",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/fabpot/Twig.git",
+            "reference": "v1.11.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/fabpot/Twig/archive/v1.11.1.zip",
+            "reference": "v1.11.1",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.4"
+        },
+        "time": "2012-11-11 17:17:59",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.11-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Twig_": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Armin Ronacher",
+                "email": "armin.ronacher@active-4.com"
+            }
+        ],
+        "description": "Twig, the flexible, fast, and secure template language for PHP",
+        "homepage": "http://twig.sensiolabs.org",
+        "keywords": [
+            "templating"
+        ]
+    },
+    {
+        "name": "pimple/pimple",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/fabpot/Pimple.git",
+            "reference": "v1.0.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/fabpot/Pimple/archive/v1.0.1.zip",
+            "reference": "v1.0.1",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2012-11-11 08:32:34",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Pimple": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Pimple is a simple Dependency Injection Container for PHP 5.3",
+        "homepage": "http://pimple.sensiolabs.org",
+        "keywords": [
+            "dependency injection",
+            "container"
+        ]
+    },
+    {
+        "name": "Aura/Cli",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/itbz/Aura.Cli",
+            "reference": "724b79a8526e8d007c268c1c13c3e4012a9f0e16"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/itbz/Aura.Cli/zipball/724b79a8526e8d007c268c1c13c3e4012a9f0e16",
+            "reference": "724b79a8526e8d007c268c1c13c3e4012a9f0e16",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2012-05-17 14:37:56",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Aura\\Cli": "src/"
+            }
+        },
+        "license": [
+            "BSD"
+        ],
+        "authors": [
+            {
+                "name": "Aura Contributors",
+                "homepage": "https://github.com/auraphp/Aura.Cli/contributors"
+            }
+        ],
+        "description": "The Aura CLI package provides a system for creating and executing CLI command objects.  It includes facilities for parsing command-line options and handling standard input/output.",
+        "homepage": "http://auraphp.github.com/Aura.Cli",
+        "keywords": [
+            "command",
+            "command line",
+            "cli",
+            "getopt",
+            "options"
+        ]
+    },
+    {
+        "name": "itbz/httpio",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/itbz/httpio.git",
+            "reference": "848de9cd0e3c39fcb9442d1f74b1385620e8ef82"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/itbz/httpio/archive/848de9cd0e3c39fcb9442d1f74b1385620e8ef82.zip",
+            "reference": "848de9cd0e3c39fcb9442d1f74b1385620e8ef82",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2012-11-19 17:29:21",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "itbz\\httpio": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Hannes Forsgård",
+                "email": "hannes.forsgard@gmail.com"
+            }
+        ],
+        "description": "Simple HTTP input/output library",
+        "homepage": "https://github.com/itbz/httpio",
+        "keywords": [
+            "http",
+            "input validation",
+            "content negotiation"
+        ]
+    }
+]

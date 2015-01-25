@@ -1,0 +1,16 @@
+<phpunit bootstrap="bootstrap.php">
+    <testsuites>
+        <testsuite>
+            <directory>./mreg</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./../src/mreg</directory>
+            <exclude>
+                <directory suffix=".php">./../src/mreg/Pdf</directory>
+                <directory suffix=".php">./../src/mreg/Cli</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>

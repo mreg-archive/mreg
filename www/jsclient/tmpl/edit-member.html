@@ -1,0 +1,81 @@
+<form class="mreg-edit-dialog mreg-validate">
+    <input type="hidden" name="etag" value="${etag}" />
+    <input type="hidden" name="link" value="${links.edit}" />
+    <input type="hidden" name="title" value="${title}" />
+
+    <div class="wider">
+        <label>Medlemsnummer</label> <span class="mreg-strong">${id}</span>
+    </div>
+
+    <div class="wider">
+        <label>Förnamn</label>
+        <input type="text" value="${names}" name="names"
+            data-bvalidator="required,maxlength[100]" />
+        <br />
+        <label>Efternamn</label>
+        <input type="text" value="${surname}" name="surname"
+            data-bvalidator="required,maxlength[100]" />
+        <br />
+        <label>Personnummer</label>
+        <input type="text" value="${personalId}" name="personalId"
+            data-bvalidator="required,validPersonalId" />
+    </div>
+
+    <div class="wider">
+        <label>Kön</label>
+        <select name="sex">
+            <option value="F" {{if sex=='F'}}selected{{/if}}>Kvinna</option>
+            <option value="M" {{if sex=='M'}}selected{{/if}}>Man</option>
+            <option value="O" {{if sex=='O'}}selected{{/if}}>Annan</option>
+        </select>
+    </div>
+
+    <div class="wider">
+        <label>Arbetssituation</label>
+        <select name="workCondition">
+            <option value="ANSTALLD" {{if workCondition=='ANSTALLD'}}selected{{/if}}>Anställd</option>
+            <option value="PENSIONAR" {{if workCondition=='PENSIONAR'}}selected{{/if}}>Pensionär</option>
+            <option value="STUDERANDE" {{if workCondition=='STUDERANDE'}}selected{{/if}}>Studerande</option>
+            <option value="EGENFORETAGARE" {{if workCondition=='EGENFORETAGARE'}}selected{{/if}}>Egenföretagare</option>
+            <option value="ARBETSLOS" {{if workCondition=='ARBETSLOS'}}selected{{/if}}>Arbetslös</option>
+            <option value="ANNAN" {{if workCondition=='ANNAN'}}selected{{/if}}>Annan</option>
+        </select>
+    </div>
+
+    <div class="wider">
+        <label>Lön</label>
+        <input type="text" value="${salary}" name="salary"
+            data-bvalidator="maxlength[11],validAmount" />
+        <br />
+        <label>Avgiftsklass</label>
+        <input type="text" value="${debitClass}" name="debitClass"
+            data-bvalidator="alphanum,maxlength[10]" />
+        <br />
+        <label>Bankkonto</label>
+        <input type="text" value="${bankAccount}" name="bankAccount"
+            data-bvalidator="maxlength[20],validAccount" />
+    </div>
+
+    <div class="wider">
+        <label>Betalar via</label>
+        <select name="paymentType">
+            <option value="LS" {{if paymentType=='LS'}}selected{{/if}}>LS</option>
+            <option value="AG" {{if paymentType=='AG'}}selected{{/if}}>AG</option>
+            <option value="BAG" {{if paymentType=='BAG'}}selected{{/if}}>BAG</option>
+            <option value="BAG-V" {{if paymentType=='BAG-V'}}selected{{/if}}>BAG-V</option>
+            <option value="MAG" {{if paymentType=='MAG'}}selected{{/if}}>MAG</option>
+            <option value="MAG-V" {{if paymentType=='MAG-V'}}selected{{/if}}>MAG-V</option>
+            <option value="PAG" {{if paymentType=='PAG'}}selected{{/if}}>PAG</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Avatar</label>
+        <input type="text" value="${avatar}" name="avatar"
+            data-bvalidator="url,maxlength[500]" />
+    </div>
+
+    <div>
+        <label>Anteckning</label> <textarea name="notes">${notes}</textarea>
+    </div>
+</form>

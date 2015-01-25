@@ -1,0 +1,212 @@
+<section class="mreg-entity">
+    <input type="hidden"
+           name="mreg-entity-title"
+           value="${title}" />
+    <input type="hidden"
+           name="mreg-entity-id"
+           value="${id}" />
+    <input type="hidden"
+           name="mreg-entity-type"
+           value="${type}" />
+    <input type="hidden"
+           name="mreg-entity-uri"
+           value="${links.edit}" />
+    <input type="hidden"
+           name="mreg-entity-description"
+           value="${description}" />
+
+    <!-- avatar -->
+    <div class="avatar ui-widget-content">
+       <div></div>
+    </div>
+    <!-- end avatar -->
+
+    <!-- header -->
+    <header>
+        <h1>
+            <span class="name">${title}</span>
+            <span class="id">${id}</span>
+        </h1>
+
+        <div>
+            <em>${description}</em>
+        </div>
+
+        <div>
+            OCR <span class="mreg-strong">${ocr}</span>
+        </div>
+
+        <div class="mreg-section mreg-hidden">
+            {{tmpl($data) "tmpl/list-meta.html"}}
+        </div>
+
+        <button class="mreg-button mreg-toggle-section">+</button>
+    </header>
+    <!-- end header -->
+
+
+    <!-- status -->
+    <ul class="mreg-section-float">
+        <h2>Status</h2>
+        <li>
+            <label>Summa</label>
+            <span class="mreg-strong">
+                {{if isBlanco}}
+                    blanco
+                {{else}}
+                    ${amount}
+                {{/if}}
+            </span>
+        </li>
+        <li>
+            <label>Autogiro</label>
+            <span class="mreg-strong">
+                {{if isAutogiro}}
+                    JA
+                {{else}}
+                    NEJ
+                {{/if}}
+            </span>
+        </li>
+        <li>
+            <label>Utskriven</label>
+            <span class="mreg-strong">
+                {{if isPrinted}}
+                    JA
+                {{else}}
+                    NEJ
+                {{/if}}
+            </span>
+        </li>
+        <li>
+            <label>Förfallen</label>
+            <span class="mreg-strong">
+                {{if isExpired}}
+                    JA
+                {{else}}
+                    NEJ
+                {{/if}}
+            </span>
+        </li>
+        <li>
+            <label>Betalad</label>
+            <span class="mreg-strong">
+                {{if isPaid}}
+                    ${paidVia}
+                {{else}}
+                    NEJ
+                {{/if}}
+            </span>
+        </li>
+        <li>
+            <label>Exporterad</label>
+            <span class="mreg-strong">
+                {{if isExported}}
+                    JA
+                {{else}}
+                    NEJ
+                {{/if}}
+            </span>
+        </li>
+        <li>
+            <label>Låst</label>
+            <span class="mreg-strong">
+                {{if isLocked}}
+                    JA
+                {{else}}
+                    NEJ
+                {{/if}}
+            </span>
+        </li>
+    </ul>
+    <!-- end status -->
+
+
+    <ul class="mreg-section-float">
+        <!-- links -->
+        <h2>Länkar</h2>
+        <li>
+            <label>Mottagare</label>
+            <a href="${recipient.link}" class="mreg-strong getlink">${recipient.id}</a>
+            <span>&nbsp;</span>
+        </li>
+        <li>
+            <label>Betalare</label>
+            <a href="${payer.link}" class="mreg-strong getlink">${payer.id}</a>
+            <span>&nbsp;</span>
+        </li>
+        <!-- end links -->
+
+        <!-- times -->
+        <h2>Tider</h2>
+        <li>
+            <label>Skapad</label>
+            <span class="mreg-strong">${tBilled}</span>
+        </li>
+        <li>
+            <label>Förfaller</label>
+            <span class="mreg-strong">${tExpire}</span>
+        </li>
+        <li>
+            <label>Utskriven</label>
+            <span class="mreg-strong">${tPrinted}</span>
+        </li>
+        <li>
+            <label>Betalad</label>
+            <span class="mreg-strong">${tPaid}</span>
+        </li>
+        <li>
+            <label>Exporterad</label>
+            <span class="mreg-strong">${tExported}</span>
+        </li>
+        <!-- end times -->
+    </ul>
+
+
+    <div style="clear:both;">&nbsp;</div>
+
+
+    <!-- content row -->
+    <div class="mreg-content-row">
+        <!-- transactions -->
+        <div>
+            <h2>Verifikation</h2>
+            <button class="mreg-button mreg-float-parent mreg-toggle-section">
+                +
+            </button>
+            <div class="mreg-section mreg-hidden">
+                <table class="mreg-table-simple">
+                    <thead>
+	                    <tr>
+		                    <th>Konto</th>
+		                    <th>summa</th>
+	                    </tr>
+                    </thead>
+                    <tbody>
+                        {{each(account, amount) transactions}}
+		                    <tr>
+			                    <td>${account}</td>
+			                    <td>${amount}</td>
+		                    </tr>
+	                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end transactions -->
+
+        <!-- revisions -->
+        <div>
+            <h2>Ändringar</h2>
+            <button class="mreg-button mreg-float-parent mreg-toggle-section">
+                +
+            </button>
+            <div class="mreg-section mreg-hidden">
+                {{tmpl($data) "tmpl/table-revisions.html"}}
+            </div>
+        </div>
+        <!-- end revisions -->
+    </div>
+    <!-- end content row -->
+
+</section>

@@ -1,0 +1,584 @@
+@import url('print.css');
+
+
+/*
+ * Presets
+ */
+html
+{
+    overflow-y              : scroll;
+}
+
+body
+{
+    margin                  : 0;
+    font-size               : 10pt;
+}
+
+h1
+{
+    margin                  : 0;
+}
+
+a
+{
+    text-decoration         : none;
+}
+
+
+
+/*
+ * Standard classes
+ */
+button.mreg-button
+{
+    -moz-border-radius      : 5px;
+    -webkit-border-radius   : 5px;
+    background-color        : #dedede;
+    color                   : #444;
+    padding                 : 1px 6px;
+    border                  : solid 1px #ccc;
+    font-size               : 0.8em!important;
+    margin-bottom           : 1px;
+}
+
+button.mreg-button:hover
+{
+    background-color        : #d7d7d7;
+}
+
+button.mreg-button:active
+{
+    background-color        : #eee;
+}
+
+.mreg-strong
+{
+    padding                 : 0px 4px 1px 4px;
+}
+
+.mreg-textarea
+{
+    line-height             : 1.3em;
+    padding                 : 5px;
+}
+
+.mreg-icon-valid
+{
+    background-image        : url(../img/icon_valid.png)!important;
+}
+
+.mreg-icon-error
+{
+    background-image        : url(../img/icon_error.png)!important;
+}
+
+.mreg-hidden
+{
+    display                 : none;
+}
+
+.mreg-error
+{
+    color                   : red;
+}
+
+
+
+/*
+ * Entity avatar
+ */
+.mreg-entity .avatar
+{
+    width                   : 80px;
+    height                  : 80px;
+    padding                 : 3px;
+    float                   : left;
+}
+
+.mreg-entity .avatar div
+{
+    width                   : 100%;
+    height                  : 100%;
+    background-image        : url('../../static/imgs/default-avatar.png');
+}
+
+
+
+/*
+ * Entity header
+ */
+.mreg-entity header
+{
+    margin-left             : 95px;
+    margin-bottom           : 15px;
+}
+
+.mreg-entity header h1
+{
+    margin                  : 0;
+}
+
+.mreg-entity header h1 span.id
+{
+    font-size               : .8em;
+    font-weight             : normal;
+}
+
+.mreg-entity header h1 span.id:before
+{
+    content                 : "#";
+}
+
+.mreg-entity header div
+{
+    line-height             : 1.5em;
+}
+
+
+
+/*
+ * Entity lists
+ */
+.mreg-entity ul
+{
+    padding                 : 0;
+    margin                  : 0;
+    list-style-type         : none;
+}
+
+.mreg-entity ul a
+{
+    float                   : left;
+}
+
+.mreg-entity ul li
+{
+    margin-bottom           : 6px;
+    clear                   : both;
+}
+
+.mreg-entity ul li .mreg-float
+{
+    float                   : left;
+}
+
+.mreg-entity ul .mreg-icon-valid, .mreg-entity ul .mreg-icon-error
+{
+    position                : relative;
+    left                    : 5px;
+}
+
+.mreg-entity ul li label
+{
+    display                 : block;
+    float                   : left;
+    min-width               : 100px;
+}
+
+
+
+/*
+ * Entity sections
+ */
+.mreg-entity .mreg-section-float
+{
+    margin-bottom           : 10px;
+    padding:right           : 1%;
+    width                   : 45%;
+    float                   : left;
+}
+
+.mreg-entity .mreg-section-wide
+{
+    clear                   : both;
+    width                   : 100%;
+    float                   : none;
+}
+
+
+
+/*
+ * Entity misc
+ */
+.mreg-entity h2
+{
+    font-size               : 1.2em;
+    color                   : #333;
+    letter-spacing          :-1px;
+    margin                  : 0;
+    padding                 : 10px 0 10px 0;
+}
+
+
+
+/*
+ * Entity content row
+ */
+.mreg-entity .mreg-content-row
+{
+    clear                   : both;
+    padding-top             : 20px;
+}
+
+.mreg-entity .mreg-content-row > div
+{
+    float                   : left;
+    padding-right           : 13px;
+    margin-bottom           : 20px;
+}
+
+.mreg-entity .mreg-content-row > div > div
+{
+    margin-top              : 10px;
+}
+
+.mreg-entity .mreg-content-row h2
+{
+    display                 : inline;
+}
+
+
+
+/*
+ * Edit dialogs
+ */
+.mreg-edit-dialog
+{
+    line-height             : 1.5em;
+    margin-top              : 10px;
+}
+
+.mreg-edit-dialog > div
+{
+    margin-bottom           : 15px;
+}
+
+.mreg-edit-dialog .ui-icon
+{
+    float                   : left;
+}
+
+.mreg-edit-dialog label
+{
+    display                 : block;
+    float                   : left;
+    width                   : 15%;
+}
+
+.mreg-edit-dialog input[type=text],
+.mreg-edit-dialog input[type=password],
+.mreg-edit-dialog textarea
+{
+    width                   : 60%;
+}
+
+.mreg-edit-dialog textarea
+{
+    height                  : 80px;
+}
+
+.mreg-edit-dialog .wider label
+{
+    width                   : 25%;
+}
+
+.mreg-edit-dialog .wider input[type=text],
+.mreg-edit-dialog .wider input[type=password],
+.mreg-edit-dialog .wider textarea
+{
+    width                   : 50%;
+}
+
+.mreg-edit-dialog .mreg-accordion > div
+{
+    height                  : 100px;
+}
+
+
+
+/*
+ * Search
+ */
+.mreg-search input[type="search"]
+{
+    margin-bottom           : 12px;
+    width                   : 70%;
+    padding                 : .4em;
+}
+
+
+
+/*
+ * Tabs
+ */
+.itb-tabset
+{
+    padding-left            : 0;
+    padding-right           : 0;
+    border                  : 0!important;
+    float                   : left;
+    margin-top              : 55px;
+    margin-bottom           : 25px;
+}
+
+#tabset-right
+{
+    width                   : 60%;
+    margin-left             : .5%;
+}
+
+#tabset-left
+{
+    width                   : 37%;
+    margin-left             : .5%;
+}
+
+.ui-tabs .fAltered:before
+{
+    content                 : "*";
+}
+
+.ui-tabs-panel
+{
+    margin-top              : 10px;
+}
+
+
+
+/*
+ * MregDataTable
+ */
+.mreg-datatable .ui-widget-header
+{
+    padding                 : 5px;
+}
+
+.mreg-datatable tr
+{
+    cursor                  : default!important;
+}
+
+.mreg-datatable td:first-child
+{
+    min-width               : 50px;
+}
+
+.mreg-datatable-buttonset
+{
+    position                : relative;
+    left                    : -5px;
+    top                     : 10px;
+}
+
+.mreg-datatable-selection-toolbar
+{
+    padding                 : 8px 0;
+}
+
+.mreg-datatable-selection-toolbar span
+{
+    margin                  : 0 2px 0 6px;
+    float                   : left;
+    color                   : #333;
+    font-size               : 0.8em;
+}
+
+.mreg-datatable-selection-toolbar .ui-icon
+{
+    float                   : left;
+    cursor                  : pointer;
+}
+
+/* TODO lägg till bilder för de olika typerna... */
+.mreg-datatable .ui-icon.type_faction_ANNAN
+{
+    background-image        : url(../img/adv-search-green.png);
+}
+
+
+
+/*
+ * jquery.dataTables
+ */
+.dataTables_wrapper .fg-button
+{
+    padding                 : 1px 8px;
+}
+
+.dataTables_wrapper table
+{
+    width                   : 100%!important;
+}
+
+.dataTables_wrapper tr:hover
+{
+    background-color        : #E8E8E8;
+}
+
+.dataTables_wrapper td
+{
+    padding                 : 5px;
+}
+
+.dataTables_wrapper a
+{
+    cursor                  : pointer!important;
+}
+
+.dataTables_wrapper .ui-icon
+{
+    float                   : left;
+}
+
+
+
+/*
+ * jsclient
+ */
+.jsclient-progressbar
+{
+    margin                  : 20px;
+    font-family             : sans-serif;
+}
+
+.jsclient-progressbar:before
+{
+    content                 : 'Laddar';
+}
+
+.jsclient-progressbar > div
+{
+    border                  : solid 1px #aaa;
+    margin                  : 3px 1px 1px 1px;
+    padding                 : 1px;
+    width                   : 20%;
+    min-width               : 300px;
+    height                  : 12px;
+}
+
+.jsclient-progressbar > div > div
+{
+    background-color        : #1E90FF;
+    width                   : 10px;
+    height                  : 12px;
+    float                   : left;
+}
+
+
+
+/*
+ * jquery.ui.toolbar
+ */
+.itb-toolbar
+{
+    padding                 : .5em;
+    margin                  : 0;
+    position                : fixed;
+    z-index                 : 1000;
+}
+
+.itb-toolbar-left
+{
+    left                    : 0;
+}
+
+.itb-toolbar-right
+{
+    right                   : 0;
+}
+
+.itb-toolbar-left, .itb-toolbar-right
+{
+    height                  : 100%;
+    top                     : 0;
+}
+
+.itb-toolbar-left div, .itb-toolbar-right div
+{
+    margin-bottom           : .8em;
+}
+
+.itb-toolbar-left .itb-toolbar-aside, .itb-toolbar-right .itb-toolbar-aside
+{
+    position                : absolute;
+    bottom                  : 0;
+}
+
+.itb-toolbar-top
+{
+    top                     : 0;
+}
+
+.itb-toolbar-bottom
+{
+    bottom                  : 0;
+}
+
+.itb-toolbar-top, .itb-toolbar-bottom
+{
+    width                   : 100%;
+    left                    : 0;
+}
+
+.itb-toolbar-top div, .itb-toolbar-bottom div
+{
+    display                 : inline-block;
+    margin-right            : 1.5em;
+}
+
+.itb-toolbar-top .itb-toolbar-aside, .itb-toolbar-bottom .itb-toolbar-aside
+{
+    float                   : right;
+}
+
+
+
+/*
+ * jquery.ui.dialog
+ */
+.itb-ui-dialog input[type="text"], .itb-ui-dialog input[type="password"]
+{
+    margin-bottom           : 12px; width:95%; padding: .4em;
+}
+
+.itb-ui-dialog a
+{
+    color                   : blue !important;
+    text-decoration         : underline;
+}
+
+
+
+/*
+ * jquery.ui.notify
+ */
+#notify-wrap
+{
+    position                : fixed;
+    top                     : 3.8em;
+    right                   : 2em;
+    z-index                 : 9999;
+    width                   : 300px;
+    font-family             : Helvetica, Arial, sans-serif;
+    font-size               : 1.05em;
+}
+
+.notify-item
+{
+    padding                 : .5em 1.4em .5em 1.4em;
+    margin-bottom           : .5em;
+    box-shadow              : .1em .1em .3em #888;
+}
+
+.notify-item:hover
+{
+    cursor                  : pointer !important;
+}
+
+.notify-item .ui-icon
+{
+    float                   : left;
+    margin-right            : .3em;
+}
+

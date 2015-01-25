@@ -1,0 +1,56 @@
+<div class="mreg-edit-dialog">
+	<div class="mreg-accordion">
+	    <h3><a href="#">Medlem</a></h3>
+	    <div>
+	        <div>&nbsp;</div>
+            <form class="wider mreg-validate">
+                <input type="hidden" name="url" value="~/members" />
+                <label>Förnamn</label>
+                <input type="text" name="names"
+                    data-bvalidator="required,maxlength[100]" />
+                <br />
+                <label>Efternamn</label>
+                <input type="text" name="surname"
+                    data-bvalidator="required,maxlength[100]" />
+                <br />
+                <label>Personnummer</label>
+                <input type="text" name="personalId"
+                    data-bvalidator="required,maxlength[13],minlength[11]" />
+            </form>
+	    </div>
+	    <h3><a href="#">Grupp</a></h3>
+	    <div>
+	        <div>&nbsp;</div>
+            <form class="mreg-validate">
+                <input type="hidden" name="url" value="~/factions" />
+                <label>Namn</label>
+                <input type="text" name="name"
+                    data-bvalidator="required,alphanum,maxlength[100]" />
+            </form>
+	    </div>
+	    <h3><a href="#">Användare</a></h3>
+	    <div>
+	        <div>&nbsp;</div>
+            <form class="wider mreg-validate">
+                <input type="hidden" name="url" value="~/users" />
+                <label>Annvändarnamn</label>
+                <input type="text" name="uname"
+                    data-bvalidator="required,alphanum,maxlength[10]" />
+                <br />
+                <label>Fullständigt namn</label>
+                <input type="text" name="fullname"
+                    data-bvalidator="required,maxlength[200]" />
+            </form>
+	    </div>
+	    <h3><a href="#">Systemgrupp</a></h3>
+	    <div>
+	        <div>&nbsp;</div>
+            <form class="mreg-validate">
+                <input type="hidden" name="url" value="~/sys_groups" />
+                <label>Namn</label>
+                <input type="text" name="name"
+                    data-bvalidator="required,alphanum,maxlength[10]" />
+            </form>
+	    </div>
+    </div>
+</div>

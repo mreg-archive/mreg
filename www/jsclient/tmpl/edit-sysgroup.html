@@ -1,0 +1,17 @@
+<form class="mreg-edit-dialog mreg-validate">
+    <input type="hidden" name="etag" value="${etag}" />
+    <input type="hidden" name="link" value="${links.edit}" />
+    <input type="hidden" name="title" value="${title}" />
+
+    <div class="wider">
+        <label>Namn</label>
+        <input type="text" value="${name}" name="name"
+            data-bvalidator="required,alphanum,maxlength[10]" />
+    </div>
+
+    <div class="wider">
+        <label>Beskrivning</label>
+        <input type="text" value="${description}" name="description"
+            data-bvalidator="alphanum,maxlength[100]" />
+    </div>
+</form>

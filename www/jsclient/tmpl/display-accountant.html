@@ -1,0 +1,204 @@
+<section class="mreg-entity">
+
+    <!-- avatar -->
+    <div class="avatar ui-widget-content">
+       <div>
+           <img src="${avatar}" />
+       </div>
+    </div>
+    <!-- end avatar -->
+
+
+    <!-- header -->
+    <header>
+        <h1>
+            <span class="name">${title}</span>
+        </h1>
+        <div>
+            Obetalda fakturor
+            <span class="mreg-strong">${counters.unpaid}</span>
+            <br />
+            Förfallna fakturor
+            <span class="mreg-strong">${counters.expired}</span>
+        </div>
+        <div class="mreg-section mreg-hidden">
+            Ej utskrivna fakturor
+            <span class="mreg-strong">${counters.unprinted}</span>
+            <br />
+            Ej betalade autogiro
+            <span class="mreg-strong">${counters.autogiro}</span>
+            <br />
+        </div>
+        <button class="mreg-button mreg-toggle-section">+</button>
+    </header>
+    <!-- end header -->
+
+
+    <!-- actions -->
+    <div class="mreg-section-float">
+        <h2>Fakturering</h2>
+        <button class="mreg-button do-bill-members">Skapa nya fakturor</button>
+        <br />
+        <button class="mreg-button do-print-to-csv">Skriv ut fakturor</button>
+        <br />
+        <button class="mreg-button do-export-invoices">Exportera till bokföring</button>
+    </div>
+    <!-- end actions -->
+
+
+    <!-- autogiro -->
+    <!--div class="mreg-section-float">
+        <h2>Autogiro</h2>
+        <button class="mreg-button">Läs in fil</button>
+        <br />
+        <button class="mreg-button">Skapa faktureringsunderlag</button>
+        <br />
+        <button class="mreg-button">Anmäl nya betalare</button>
+    </div-->
+    <!-- end autogiro -->
+
+
+    <!-- plus/bankgiro -->
+    <!--div class="mreg-section-float">
+        <h2>Plus- och Bankgiro</h2>
+        <button class="mreg-button">Läs in fil från bankgirot</button>
+        <br />
+        <button class="mreg-button">Läs in fil från plusgirot</button>
+    </div-->
+    <!-- end plus/bankgiro -->
+
+
+    <!-- content row -->
+    <div class="mreg-content-row">
+
+        <!-- debits -->
+        <div>
+            <h2>Avgiftstabell</h2>
+            <button class="mreg-button mreg-float-parent mreg-toggle-section">
+                +
+            </button>
+            <div class="mreg-section mreg-hidden">
+                <table class="mreg-table-simple">
+                    <thead>
+	                    <tr>
+		                    <th>Namn</th>
+		                    <th>avgift</th>
+		                    <th>intervall-start</th>
+		                    <!--th>intervall-stopp</th-->
+		                    <th>avsättningar</th>
+		                    <th>konteringsmall</th>
+	                    </tr>
+                    </thead>
+                    <tbody>
+                        {{each(index, debit) debits}}
+		                    <tr>
+			                    <td>${debit.name}</td>
+			                    <td>${debit.charge}</td>
+			                    <td>${debit.interval.start}</td>
+			                    <!--td>${debit.interval.end}</td-->
+			                    <td>${debit.debits}</td>
+			                    <td>${debit.template}</td>
+		                    </tr>
+	                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end debits -->
+
+
+        <!-- templates -->
+        <div>
+            <h2>Konteringsmallar</h2>
+            <button class="mreg-button mreg-float-parent mreg-toggle-section">
+                +
+            </button>
+            <div class="mreg-section mreg-hidden">
+                <p>
+                    <button class="mreg-button do-export-templates">Exportera</button>
+                    <button class="mreg-button do-import-templates">Importera</button>
+                </p>
+                <table class="mreg-table-simple">
+                    <thead>
+	                    <tr>
+		                    <th>Namn</th>
+		                    <th>beskrivning</th>
+	                    </tr>
+                    </thead>
+                    <tbody>
+                        {{each(index, template) templates}}
+		                    <tr>
+			                    <td>${template.id}</td>
+			                    <td>${template.name}</td>
+		                    </tr>
+	                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end templates -->
+
+        <!-- channels -->
+        <div>
+            <h2>Bokföringskanaler</h2>
+            <button class="mreg-button mreg-float-parent mreg-toggle-section">
+                +
+            </button>
+            <div class="mreg-section mreg-hidden">
+                <table class="mreg-table-simple">
+                    <thead>
+	                    <tr>
+		                    <th>Namn</th>
+		                    <th>konto</th>
+	                    </tr>
+                    </thead>
+                    <tbody>
+                        {{each(channel, account) channels}}
+		                    <tr>
+			                    <td>${channel}</td>
+			                    <td>(${account.nr}) ${account.name}</td>
+		                    </tr>
+	                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end channels -->
+
+        <!-- accounts -->
+        <div>
+            <h2>Kontoplan</h2>
+            <button class="mreg-button mreg-float-parent mreg-toggle-section">
+                +
+            </button>
+            <div class="mreg-section mreg-hidden">
+                <p>
+                    <button class="mreg-button do-export-accounts">Exportera</button>
+                    <button class="mreg-button do-import-accounts">Importera</button>
+                </p>
+                <table class="mreg-table-simple">
+                    <thead>
+	                    <tr>
+		                    <th>Nr</th>
+		                    <th>typ</th>
+		                    <th>namn</th>
+	                    </tr>
+                    </thead>
+                    <tbody>
+                        {{each(index, account) accounts}}
+		                    <tr>
+			                    <td>${account.nr}</td>
+			                    <td>${account.type}</td>
+			                    <td>${account.name}</td>
+		                    </tr>
+	                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end accounts -->
+
+    </div>
+    <!-- end content row -->
+
+</section>

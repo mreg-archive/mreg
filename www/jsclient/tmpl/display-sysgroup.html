@@ -1,0 +1,44 @@
+<section class="mreg-entity">
+    <input type="hidden"
+           name="mreg-entity-title"
+           value="${title}" />
+    <input type="hidden"
+           name="mreg-entity-id"
+           value="${name}" />
+    <input type="hidden"
+           name="mreg-entity-type"
+           value="${type}" />
+    <input type="hidden"
+           name="mreg-entity-uri"
+           value="${links.edit}" />
+    <input type="hidden"
+           name="mreg-entity-description"
+           value="${description}" />
+
+    <!-- avatar -->
+    <div class="avatar ui-widget-content">
+       <div></div>
+    </div>
+    <!-- end avatar -->
+
+    <!-- header -->
+    <header>
+        <h1>
+            <span class="name">${title}</span>
+        </h1>
+
+        <div>
+            <em>${description}</em>
+        </div>
+
+        <div class="mreg-section mreg-hidden">
+            {{tmpl($data) "tmpl/list-meta.html"}}
+        </div>
+
+        <button class="mreg-button mreg-toggle-section">+</button>
+    </header>
+    <!-- end header -->
+
+    <div style="clear:both;">&nbsp;</div>
+
+</section>

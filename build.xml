@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="mreg" basedir="." default="buildAll">
+
+    <property name="MYSQL_USER" value=""/>
+    <property name="MYSQL_PSWD" value=""/>
+    <property name="MYSQL_DB" value=""/>
+
+    <property name="LOCAL_HOST" value="mreg.local"/>
+
+    <property name="APP_NAME" value="mreg"/>
+    <property name="APP_ROOT" value="${project.basedir}"/>
+    <property name="WWW_DIR" value="${APP_ROOT}/www"/>
+    <property name="SRC_DIR" value="${APP_ROOT}/src"/>
+    <property name="TEST_DIR" value="${APP_ROOT}/tests"/>
+    <property name="BUILD_DIR" value="${APP_ROOT}/build"/>
+    <property name="CODE_STANDARD" value="Zend"/>
+
+    <fileset dir="${SRC_DIR}/mreg" id="filesetSource">
+        <include name="**/*.php"/>
+        <exclude name="Pdf/**"/>
+        <exclude name="Cli/**"/>
+    </fileset>
+
+
+    <!-- DEV
+    
+         test           : run phpunit tests and create coverage report
+         sniff          : run code sniffer
+         phpcpd         : detect copy-paste
+         phpmd          : detect messy code
+         pdepend        : php depend
+         document       : generate documentation
+         index          : rebuild local search index and clear local cache
+    -->
+
+    <target name="buildAll" depends="test,sniff,phpcpd,phpmd,pdepend,document">
+    </target>
+
+    <target name="createBuildDir">
+        <mkdir dir="${BUILD_DIR}"/>
+        <mkdir dir="${BUILD_DIR}/phpcs"/>
+        <mkdir dir="${BUILD_DIR}/pdepend"/>
+    </target>
+
+    <target name="test" depends="getdependencies,createBuildDir">
+        <exec
+            command="phpunit --coverage-html ${BUILD_DIR}/test-coverage --coverage-text=${BUILD_DIR}/test-coverage.txt"
+            dir="${TEST_DIR}"
+            checkreturn="true"
+            passthru="true"
+            />
+    </target>
+
+    <target name="sniff" depends="createBuildDir">
+        <phpcodesniffer
+            standard="${CODE_STANDARD}"
+            showWarnings="true"
+            encoding="utf8"
+            haltonerror="false"
+            haltonwarning="false"
+            docGenerator="HTML"
+            docFile="${BUILD_DIR}/phpcs/rules.html"
+            >
+            <fileset refid="filesetSource"/>
+            <formatter type="full" outfile="${BUILD_DIR}/phpcs/sniff.txt"/>
+        </phpcodesniffer>
+    </target>
+
+    <target name="phpcpd" depends="createBuildDir">
+        <phpcpd>
+            <fileset refid="filesetSource"/>
+            <formatter type="default" outfile="${BUILD_DIR}/phpcpd.txt"/>
+       </phpcpd>
+    </target>
+
+    <target name="phpmd" depends="createBuildDir">
+        <phpmd>
+            <fileset refid="filesetSource"/>
+            <formatter type="html" outfile="${BUILD_DIR}/phpmd.html"/>
+        </phpmd>
+    </target>
+
+    <target name="pdepend" depends="createBuildDir">
+        <phpdepend>
+            <fileset refid="filesetSource"/>
+            <logger type="jdepend-chart" outfile="${BUILD_DIR}/pdepend/jdepend.svg"/>
+            <logger type="overview-pyramid" outfile="${BUILD_DIR}/pdepend/pyramid.svg"/>
+            <logger type="summary-xml" outfile="${BUILD_DIR}/pdepend/summary.xml"/>
+        </phpdepend>
+    </target>
+
+    <target name="document" depends="createBuildDir">
+        <exec
+            command="phpdoc --title ${APP_NAME} --ignore */Cli/*,*/fakturera.php -d ${SRC_DIR} -t ${BUILD_DIR}/apidocs"
+            dir="${APP_ROOT}"
+            passthru="true"
+            />
+        <exec
+            command="chmod -R 777 apidocs"
+            dir="${BUILD_DIR}"
+            />
+    </target>
+
+    <target name="index">
+        <echo msg="Rebuilding search index on ${LOCAL_HOST}..." />
+        <exec
+            command="cli/rebuild-search-index.php"
+            dir="${APP_ROOT}"
+            checkreturn="true"
+            />
+
+        <echo msg="Clear cache on ${LOCAL_HOST}..." />
+        <exec
+            command="wget --no-check-certificate --post-data='' http://${LOCAL_HOST}/controllers/clear-cache; rm clear-cache"
+            checkreturn="true"
+            />
+    </target>
+
+
+    <!-- EXPORT
+    
+         export     : export from svn
+         backup     : create backup zip archive
+         cleanup    : cleanup exported files
+    -->
+
+    <target name="export">
+        <echo msg="Exporting project from SVN..." />
+        <exec
+            command="svn export . ${BUILD_DIR}/${APP_NAME}"
+            dir="${APP_ROOT}"
+            checkreturn="true"
+            />
+    </target>
+
+    <target name="backup" depends="export">
+        <tar destfile="${APP_ROOT}/backup.tar.gz" compression="gzip">
+            <fileset dir="${BUILD_DIR}/${APP_NAME}">
+                <include name="*" />
+            </fileset>
+        </tar>
+        <phingcall target="cleanup" />
+    </target>
+
+    <target name="cleanup">
+        <delete dir="${BUILD_DIR}/${APP_NAME}" />
+    </target>
+
+
+    <!-- SVN
+    
+         commit : commit to svn
+         update : update from svn
+    -->
+
+    <target name="commit" depends="buildAll,exportDB">
+        <svncommit workingcopy="${APP_ROOT}" message="phing commit" />
+    </target>
+
+    <target name="update">
+        <svnupdate todir="${APP_ROOT}" />
+        <phingcall target="importDB" />
+    </target>
+
+
+    <!-- SETUP INSTANCE
+    
+         load dependencies
+         import database
+         build
+    -->
+
+    <target name="setup" depends="getdependencies,importDB">
+        <exec executable="sed" dir="${APP_ROOT}/www/" output="${APP_ROOT}/www/.htaccess">
+            <arg value="s:APP_ROOT:${APP_ROOT}:g" />
+            <arg value="htaccess.template" />
+        </exec>
+
+        <exec executable="sed" dir="${APP_ROOT}/www/" output="${APP_ROOT}/www/config.php">
+            <arg value="s:APP_ROOT:${APP_ROOT}:g" />
+            <arg value="config.php.template" />
+        </exec>
+
+        <phingcall target="index" />
+    </target>
+
+
+    <!-- DATABASE
+    
+         exportDB   : Export database to .sql
+         importDB   : Import database from .sql
+         buildDB    : Build database from .csv files
+    -->
+
+    <target name="exportDB">
+        <echo msg="Exporting database..." />
+        <exec executable="mysqldump" output="${APP_ROOT}/db/DB.sql" checkreturn="true">
+            <arg value="-u${MYSQL_USER}" />
+            <arg value="-p${MYSQL_PSWD}" />
+            <arg value="--triggers" />
+            <arg value="--routines" />
+            <arg value="--events" />
+            <arg value="${MYSQL_DB}" />
+        </exec>
+    </target>
+
+    <target name="importDB">
+        <echo msg="Importing database..." />
+        <exec
+            command='mysql -u${MYSQL_USER} -p${MYSQL_PSWD} -e "DROP DATABASE ${MYSQL_DB}"'
+            checkreturn="false"
+            />
+        <exec
+            command='mysql -u${MYSQL_USER} -p${MYSQL_PSWD} -e "CREATE DATABASE ${MYSQL_DB}"'
+            checkreturn="true"
+            />
+        <exec
+            command="mysql -u${MYSQL_USER} -p${MYSQL_PSWD} -D${MYSQL_DB} &lt; DB.sql"
+            dir="${APP_ROOT}/db"
+            checkreturn="true"
+            />
+    </target>
+
+
+    <!-- COMPOSER
+    
+         getcomposer        : install composer
+         getdependencies    : install dependencies
+    -->
+
+    <target name="getdependencies" depends="getcomposer">
+        <if>
+            <available file="${APP_ROOT}/libs" />
+            <then>
+                <echo msg="Dependencies installed in libs directory" />
+            </then>
+            <else>
+                <echo msg="Downloading dependencies using composer..." />
+                <exec
+                    command="php composer.phar install --dev"
+                    dir="${APP_ROOT}"
+                    checkreturn="true"
+                    passthru="true"
+                    />
+            </else>
+        </if>
+    </target>
+
+    <target name="getcomposer">
+        <if>
+            <available file="${APP_ROOT}/composer.phar" />
+            <then>
+                <echo msg="Composer.phar installed" />
+            </then>
+            <else>
+                <echo msg="Downloading composer.phar..." />
+                <exec
+                    command="curl -s http://getcomposer.org/installer | php"
+                    dir="${APP_ROOT}"
+                    checkreturn="true"
+                    passthru="true"
+                    />
+            </else>
+        </if>
+    </target>
+
+</project>

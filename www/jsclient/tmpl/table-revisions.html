@@ -1,0 +1,22 @@
+<table class="mreg-table-simple">
+    <thead>
+	    <tr>
+		    <th>Fält</th>
+		    <th>datum</th>
+		    <th>användare</th>
+		    <th>från</th>
+		    <th>till</th>
+	    </tr>
+    </thead>
+    <tbody>
+        {{each(index, rev) revisions}}
+		    <tr>
+			    <td>${rev.ref_column}</td>
+			    <td>${rev.tModified}</td>
+			    <td>${rev.modifiedBy}</td>
+			    <td title="${rev.old_value}">${rev.old_value}</td>
+			    <td title="${rev.new_value}">${rev.new_value}</td>
+		    </tr>
+	    {{/each}}
+    </tbody>
+</table>

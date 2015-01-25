@@ -1,0 +1,50 @@
+@font-face
+{
+    font-family             : 'Akzidenz';
+    src                     : url('../../static/fonts/BAG/regular.ttf');
+}
+
+@font-face
+{
+    font-family             : 'AkzidenzLight';
+    src                     : url('../../static/fonts/BAG/light.ttf');
+}
+
+@font-face
+{
+    font-family             : 'AkzidenzBold';
+    src                     : url('../../static/fonts/BAG/bold.ttf');
+}
+
+@font-face
+{
+    font-family             : 'AkzidenzItalic';
+    src                     : url('../../static/fonts/BAG/italic.ttf');
+}
+
+h1
+{
+    font-family             : 'AkzidenzBold';
+}
+
+h2, h3, h4, h5, h6
+{
+    font-family             : 'AkzidenzLight';
+    font-weight             : normal;
+}
+
+p, li, div
+{
+    font-family             : 'Akzidenz';
+}
+
+b, strong, mark
+{
+    font-family             : 'AkzidenzBold';
+}
+
+i, em, blockquote, q, cite
+{
+    font-family             : 'AkzidenzItalic';
+    font-style              : normal;
+}

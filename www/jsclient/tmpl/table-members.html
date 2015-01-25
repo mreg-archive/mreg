@@ -1,0 +1,24 @@
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Namn</th>
+            <th>Id</th>
+            <th>Typ</th>
+            <th>Url</th>
+            <th>Ls</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{each(index, member) items}}
+            <tr>
+                <td></td>
+                <td>${member.title}</td>
+                <td>${member.id}</td>
+                <td>${member.type}</td>
+                <td>${member.links.edit}</td>
+                <td>${member.ls}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

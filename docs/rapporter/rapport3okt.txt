@@ -1,0 +1,91 @@
+Lägesrapport nya medlemsregistret, 3 oktober
+============================================
+
+Arbetet med det nya medlemsregistret har dragit ut på tiden. Detta beror såklart
+på en mängd olika anledningar, av dessa står två ut:
+
+	. Tidsplanen har varit alltför snäv. Framförallt därför att jag
+underskattat hur lång tid det tar att skapa stora system. Ett komplext system
+behöver så att säga mer energi än summan av delarna.
+
+	. Att implementera teknisk byråkrati var ett mycket större arbete
+än jag förutsåg. Detta gäller i första hand Autogirot. Då det inte funnits några
+tillgängliga bibliotek jag kunnat luta mig mot samt då dokumentationen från
+Bankgiro-centralen varit bristfällig har detta varit ett mycket tidskrävande arbete.
+Inte minst därför att Autogirot finns i flera olika verioner och snarlika layouter.
+
+Avsaknaden av uppdaterade testversioner beror på ett aktivt val från min sida.
+Enligt specifikationerna ska registret kunna hantera en mängd olika scenarier
+och gränssnitt. Allt ifrån export till PDF och bokföringsprogram till
+rättighetshantering och import av bank-data. Jag har valt att bygga de tydligt
+definierade delarna en i taget, för att först nu i slutet av projektet på allvar
+foga dem samman. Det har varit ett bra arbetssätt för mig, men har såklart
+begrännsat möjligheterna att visa upp halvfärdiga resultat.
+
+Innan jag listar vad jag gjort respektive vad som saknas vill jag gärna betona att
+jag själv känner mig trygg med att resultatet blir bra. Att det drar ut på tiden är
+såklart jobbigt, både för mig personligen och för hela projektet. Men från mitt
+perspektiv går arbetet bra och hela tiden frammåt.
+
+
+
+Färdiga moduler
+---------------
+
+Färdiga subsystem är bland andra:
+
+* PDF generering utifrån editerbara mallar.
+
+* Kommunikationssystem för att integrerat skicka mail/sms/skriva ut snigelpost.
+Registret kan laddas med en lista av medlemmar/grupper och sedan skickat mail/sms
+eller skriva ut PDFer beroende av hur varje medlem/grupp önskar få information.
+
+* Klass för generering av .SIE filer, för export till bokföringsprogram.
+
+* Modul för att läsa och generera Autogiro-filer. Både för det utgående
+_Autogiro Privat_ samt _Nya Autogirot_.
+
+* Modul för att läsa Bankgiro-filer i BG-MAX format.
+
+* Modul för att läsa PostGiro-filer, Layout N.
+
+* *nix inspirerat rättighetssystem på tabell- samt rad-nivå (implementerat i SQL).
+
+* Standardiserad hantering av telefonnummer samt adresser. Förberett för att
+kunna importera data från offentliga resurser.
+
+* Validering av telefonnummer via Post- och telestyrelsen.
+
+* Autokomplettering av postnummer och postort via Posten.se.
+
+* Servergränssnitt (RESTful web service). Mycket tid har ägnats åt säkerhet.
+
+* System för att undvika informationsförluster vid samtidiga uppdateringar. (Http etags.)
+
+* Användarklient i javascript. Denna är dock inte färdig utan kommer att utvecklas
+efterhand vi ser hur det dagliga arbetet i registret flyter.
+
+
+
+Vad som återstår
+----------------
+
+Följande är vad som återstår att göra innan vi har en fungerande beta-version av
+registret. Efter det återstår såklart att vidareutveckla användargränssnittet,
+att definiera vilka rapporter som ska kunna skrivas ut osv...
+
+* Att väva samman de olika ekonomi-orienterade funktionerna till ett robust
+gränssnitt.
+
+* Att skapa användar- och server-gränssnitt för arbetet att länka medlemmar
+till grupper samt grupper till grupper.
+
+* Viss uppsnyggning och trimning för att det ska vara meningsfullt att börja
+arbetet med testgrupp.
+
+&nbsp; +
+&nbsp; +
+&nbsp; +
+
+_Malmö den 3 oktober_ +
+_Hannes Forsgård_

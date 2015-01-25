@@ -1,0 +1,100 @@
+﻿Det nya medlemsregistret, februari 2012
+=======================================
+
+
+Arbetet med det nya medlemsregistret har av olika anledningar dragit ut på tiden:
+
+* Tidsplanen var redan från början alldeles för snäv.
+* Flera delar har tagit mycket mer tid i anspråk än jag trodde, framförallt handlar det om filformat till och från de olika banksystemen.
+* Slutligen gjorde jag några dåliga vägval i början av projektet, vilket gjort att jag varit tvungen att helt skriva om vissa delar.
+
+Jag har nu arbetat med projektet i ett drygt år (halvtid det första halvåret och heltid det senare), vilket ska jämföras med att vi i början tänkte oss att det skulle ta 6 månader halvtid. Det har varit ett stressigt och mycket givande år. Jag är stolt över det arbete jag utfört och helt lugn med att resultatet blir bra. Den del av fördröjningen som beror på mig känner jag att jag har åtgärdat.
+
+Det är såklart ett problem att återkopplingen varit dålig, egentligen är det bara Ola (och för vissa delar TC) som vet vad jag håller på med. Nedan följer en lägesrapport. Jag hoppas att den visar att det har varit ett bra och produktivt projekt, men att det behöver förlängas. Att utveckla ett bra och stabilt register tar tid. 
+
+Jag tycker att det är rimligt att skjuta till ytterligare tre månadslöner (alltså lika mycket pengar som jag hittills fått) för att jag ska kunna slutföra projektet; Med målet att kravspecifikationen ska vara uppfylld till sommaren.
+
+
+Lägesrapport
+------------
+
+Här kommer jag att gå igenom specifikationen jag fick i början av projektet och redogöra för hur långt jag kommit med varje del. 
+
+A. Medlemsregister
+~~~~~~~~~~~~~~~~~~
+
+Det grundläggande registret över medlemmar är på plats. Vissa justeringar av
+datastrukturerna behöver fortfarande göras. Olika grupper sparar olika
+data och det tar extra tid för mig att analysera det. En till ett par veckor ytterligare behövs.
+
+
+B. Ekonomiregister
+~~~~~~~~~~~~~~~~~~
+
+Ekonomiregistret är den del där mest arbete återstår. Jag har skrivit många av delfunktionerna:
+
+* Generering och läsning av filer till/från Bank-, Plus- samt Autogirot.
+* Exportformat till bokföringsprogram.
+
+Men jag har inte designat fakturahanteringen eller hur fakturor ska relatera till avgiftstabeller och kontoplaner. Eftersom det inte är helt klart hur systemet kommer att se ut är det också svårt att säga hur lång tid det kommer att ta. Jag uppskattar det till mellan en och två månader.
+
+
+D-F. Gruppregister
+~~~~~~~~~~~~~~~~~~
+
+Register över interna grupper är liksom medlemsregistret så gott som klart, men vissa justeringar av datastrukturer behöver göras även här. Mycket energi har lagts på att beskriva relationer mellan de olika grupperna. För att fungera väl behöver datastrukturerna spegla organisationsmodellen. Och eftersom de är komplicerad med många relationer och korsreferenser har detta tagit mycket tid. En till ett par veckor ytterligare behövs.
+
+
+G. Arbetsplatsregister
+~~~~~~~~~~~~~~~~~~~~~~
+
+Ett arbetsplatsregister finns, men det behöver omarbetas: Relationen mellan arbetsplats och arbetsgivare visade sig vara mer komplicerad än jag förutsett. Registret jag skrivit kan inte hantera situationer där personer på samma arbetsplats har olika arbetsgivare. En omarbetning är designad, men har inte implementerats. Ett par veckor ytterligare behövs.
+
+
+I. Behörighetshantering
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Mreg innehåller ett unix-likt system för att hantera rättigheter, där skriv- och läsrättigheter kan sättas dynamiskt på varje resurs. På detta sätt kan även komplicerade konfigurationer som ringa-runt-användare skapas. Behörighetshanteringen är färdig.
+
+
+J. Säkerhet
+~~~~~~~~~~~
+
+Datasäkerhet är givetvis ett fortgående arbete. Mycket energi har lagts på att säkra applikationen mot olika typer av attacker. För den tekniskt intresserade handlar det bland annat om hantering av lösenord och sessioner samt Cross-Site Scripting och Cross-Site Request Forgeries. Mreg innehåller  en mängd försvarsstrategier. När hela arbetet närmar sig sitt slut behöver dessa utvärderas, helst av någon extern person.
+
+Specen innehåller även flera punkter som hör till transportlagret snarare än applikationslagret (certifikat, serverkonfiguration mm). Dessa har jag inte möjlighet att arbeta med, de är systemadministratörens ansvar.
+
+
+K. Rapporter
+~~~~~~~~~~~~
+
+Mreg innehåller ett mallsystem för att generera rapporter till mail eller pdf. Men de specifika rapporterna samt gränssnitt för att skapa rapporter saknas. Ett par veckor ytterligare behövs.
+
+
+L. Kommunikationer
+~~~~~~~~~~~~~~~~~~
+
+Mreg kan skicka SMS, mail och skapa utskrifter (PDF-filer som laddas ner) utifrån mallar, samt hantera masskommunikation via prioriteringslistor enligt specen. Vi har dock inte bestämt oss för någon SMS-tjänst, när det väl är gjort krävs en kortare tid för att anpassa till leverantörens API.
+
+Det visade sig också nyligen att jag delvis missförstått hur det bör fungera när medlemmar tackar nej till kommunikation via SMS eller väljer Mail framför snigelpost. Vissa justeringar behöver därför göras även här.
+
+
+Teknik
+------
+
+För den intresserade kommer här en kort genomgång av de tekniska val jag har gjort:
+
+Mreg är uppbygd som en RESTful webbservice skriven i PHP med en fristående javascript-klient.
+
+Klienten är använder AJAX med hjälp av jQuery och får sin look-and-feel från jQuery-UI. All kommunikation mellan server och klient sker med hjälp av JSON.
+
+På servern använder jag en model-view-controller arkitektur (även om det tekniskt sett inte blir så mycket view att tala om när det enda jag gör är att skriva ut JSON). Till mina modeller använder jag en Active Record implementation jag själv har skrivit.
+
+Utöver det använder jag en mängd bibliotek för olika uppgifter, bla Swift Mailer för att skicka mail, Twig för mallar, Wkhtmltopdf för att rendera PDFer osv..
+
+Bakom alltihop står MySQL. Applikationen vilar tungt på moderna funktioner i MySQL: triggers ser till att ändringar sparas, events skapar cach-tabeller optimerade för fulltextsökning, lagarde funktioner driver rättighetssystemet.
+
+.
+
+'Malmö den 2 februari' +
+'Hannes Forsgård'

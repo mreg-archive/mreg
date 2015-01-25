@@ -1,0 +1,182 @@
+<section class="mreg-entity">
+    <input type="hidden"
+           name="mreg-entity-title"
+           value="${title}" />
+    <input type="hidden"
+           name="mreg-entity-id"
+           value="${id}" />
+    <input type="hidden"
+           name="mreg-entity-type"
+           value="${type}" />
+    <input type="hidden"
+           name="mreg-entity-uri"
+           value="${links.edit}" />
+    <input type="hidden"
+           name="mreg-entity-description"
+           value="${description}" />
+
+
+    <!-- avatar -->
+    <div class="avatar ui-widget-content">
+       <div title="Redigare avatar för att ändra bild">
+           <img src="${avatar}" />
+       </div>
+    </div>
+    <!-- end avatar -->
+
+
+    <!-- header -->
+    <header>
+        <h1>
+            {{if url}}
+                <a href="${url}"
+                   target="_blank"
+                   title="Surfa till ${url}"
+                   class="name"
+                   >
+                   ${name}
+                </a>
+            {{else}}
+                <span class="name"
+                      title="Lägg till url för att skapa länk"
+                      >
+                      ${name}
+                </span>
+            {{/if}}
+            <span class="id">${id}</span>
+        </h1>
+
+        <div>
+            <em>${description}</em>
+        </div>
+
+        <div>
+            Organiseras under
+            {{each(index, parent) treepath}}
+                <a href="${parent.link}"
+                   class="getlink mreg-strong"
+                   title="Öppna ${parent.name}"
+                   >${parent.name}</a>
+            {{/each}}
+        </div>
+
+        <div class="mreg-section mreg-hidden">
+            {{tmpl($data) "tmpl/list-meta.html"}}
+        </div>
+
+        <button class="mreg-button mreg-toggle-section">+</button>
+    </header>
+    <!-- end header -->
+
+
+    <!-- contacts -->
+        {{tmpl($data) "tmpl/list-contacts.html"}}
+    <!-- end contacts -->
+
+
+    <!-- economy -->
+    <ul class="mreg-section-float">
+        <h2>Ekonomi</h2>
+        <li>
+            <label>PlusGiro</label>
+            <span class="mreg-strong">
+                {{if plusgiro}}
+                    ${plusgiro}
+                {{else}}
+                    <em>PlusGiro saknas</em>
+                {{/if}}
+            </span>
+        </li>
+        <li>
+            <label>Bankgiro</label>
+            <span class="mreg-strong">
+                {{if bankgiro}}
+                    ${bankgiro}
+                {{else}}
+                    <em>Bankgiro saknas</em>
+                {{/if}}
+            </span>
+        </li>
+    </ul>
+    <!-- end economy -->
+
+
+    <div style="clear:both;">&nbsp;</div>
+
+
+    <!-- notes -->
+    <div class="mreg-section-float">
+        <h2>Anteckningar</h2>
+        <div class="mreg-strong mreg-textarea">
+        {{if notes}}
+            ${notes}
+        {{else}}
+            <em>Anteckningar saknas</em>
+        {{/if}}
+        </div>
+    </div>
+    <!-- end notes -->
+
+
+    <!-- content row -->
+    <div class="mreg-content-row">
+        <!-- members -->
+        <div>
+            <input type="hidden"
+                   name="mreg-members-url"
+                   value="${links['/mreg/rels/members']}" />
+            <h2>Medlemmar</h2>
+            <button class="mreg-button mreg-float-parent mreg-show-members">
+                +
+            </button>
+            <div class="mreg-section mreg-hidden mreg-members-content"></div>
+        </div>
+        <!-- end members -->
+
+
+        <!-- factions -->
+        <div>
+            <input type="hidden"
+                   name="mreg-factions-url"
+                   value="${links['/mreg/rels/factions']}" />
+            <h2>Grupper</h2>
+            <button class="mreg-button mreg-float-parent mreg-toggle-section">
+                +
+            </button>
+            <div class="mreg-section mreg-hidden">
+                {{tmpl($data) "tmpl/table-factions.html"}}
+            </div>
+        </div>
+        <!-- end factions -->
+
+
+        <!-- history -->
+        <div>
+            <input type="hidden"
+                   name="mreg-history-url"
+                   value="${links['/mreg/rels/history']}" />
+            <h2>Historik</h2>
+            <button class="mreg-button mreg-float-parent mreg-show-history">
+                +
+            </button>
+            <div class="mreg-section mreg-hidden mreg-history-content"></div>
+        </div>
+        <!-- end history -->
+
+
+        <!-- revisions -->
+        <div>
+            <h2>Ändringar</h2>
+            <button class="mreg-button mreg-float-parent mreg-toggle-section">
+                +
+            </button>
+            <div class="mreg-section mreg-hidden">
+                {{tmpl($data) "tmpl/table-revisions.html"}}
+            </div>
+        </div>
+        <!-- end revisions -->
+
+    </div>
+    <!-- end content row -->
+
+</section>

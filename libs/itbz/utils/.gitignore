@@ -1,0 +1,6 @@
+build
+vendor
+composer.phar
+composer.lock
+Utils.sublime-project
+Utils.sublime-workspace

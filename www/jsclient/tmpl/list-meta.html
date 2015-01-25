@@ -1,0 +1,37 @@
+<div>
+    Uppdaterades för
+    <time datetime="${tModified}"
+          class="mreg-strong">${tModified}</time>
+    av
+    <a href="${modifiedBy.link}"
+       class="getlink mreg-strong"
+       title="Öpnna ${modifiedBy.name}">
+       ${modifiedBy.name}</a>
+</div>
+
+<div>
+    Skapades för
+    <time datetime="${tCreated}"
+          class="mreg-strong"
+          >
+          ${tCreated}
+    </time>
+</div>
+
+<div>
+    Ägs av
+    <a href="${owner.link}"
+       class="getlink mreg-strong"
+       title="Öpnna ${owner.name}">${owner.name}</a>
+</div>
+
+<div>
+    Tillhör grupp
+    <a href="${group.link}"
+       class="getlink mreg-strong"
+       title="Öpnna ${group.name}">${group.name}</a>
+</div>
+
+<div>
+    Rättigheter <span class="mreg-strong">${mode}</span>
+</div>

@@ -1,0 +1,16 @@
+<form class="mreg-edit-dialog mreg-validate">
+    <div>
+        <label>Skapa ny</label>
+        <select name="url">
+            <option value="${addresses}">Adress</option>
+            <option value="${phones}">Telefon</option>
+            <option value="${mails}">Mail</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Namn</label>
+        <input type="text" name="name"
+            data-bvalidator="required,alphanum,maxlength[50]" />
+    </div>
+</form>

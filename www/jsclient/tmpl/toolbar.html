@@ -1,0 +1,149 @@
+<div class="itb-buttonset">
+    <button
+        title="Mitt konto"
+        class="display-user"
+        href="~/users/${user.uname}"
+        >
+        ${user.uname}@${user.groups[0]}
+    </button>
+    <button
+        title="Avsluta"
+        class="do-logout"
+        href="${logoutPath}"
+        data-ignore-label="true"
+        data-icon="ui-icon-power"
+        >
+        Logga ut
+    </button>
+</div>
+
+<div class="itb-buttonset">
+    <button
+        title="Visa användarmanualen"
+        class="display-help"
+        data-ignore-label="true"
+        data-icon="ui-icon-help"
+        >
+        Visa användarmanualen
+    </button>
+    <button
+        title="Ny sökning (Ctrl+F)"
+	    class="create-new-search"
+        data-ignore-label="true"
+        data-icon="ui-icon-search"
+	    data-hotkey="Ctrl+F"
+        >
+        Ny sökning
+    </button>
+</div>
+
+<div class="itb-buttonset">
+    <button
+        title="Visa urklipp"
+        class="display-clipboard"
+        data-ignore-label="true"
+        data-icon="ui-icon-clipboard"
+        >
+        Visa urklipp
+    </button>
+    <button
+        title="Skapa ny arbetslista"
+        class="create-new-worklist"
+        data-ignore-label="true"
+        data-icon="ui-icon-script"
+        >
+        Skapa ny arbetslista
+    </button>
+</div>
+
+{{if user.isRoot}} 
+    <button
+        title="Öppna admin"
+        class="open-admin"
+        data-ignore-label="true"
+        data-icon="ui-icon-wrench"
+        >
+        Öppna admin
+    </button>
+{{/if}}
+
+
+{{if user.accountingFor !== null}} 
+    <button
+        title="Öppna bokhållare (Alt+Ctrl+B)"
+        class="open-accountant"
+        data-ignore-label="true"
+        data-icon="ui-icon-note"
+	    data-hotkey="Alt+Ctrl+B"
+        >
+        Öppna bokhållare
+    </button>
+{{/if}}
+
+<!--
+Exempel med radiobuttons
+
+<div class="itb-buttonset">
+	<input type="radio" id="radio1" name="radioTest">
+	<label for="radio1">a</label>
+	<input type="radio" id="radio2" name="radioTest" checked="checked" />
+	<label for="radio2">b</label>
+</div>
+
+Exempel med checkbox
+<div class="itb-buttonset">
+    <input type="checkbox" id="checkbox" />
+    <label title="Box" for="checkbox">Redigera</label>
+</div>
+-->
+
+<div class="itb-toolbar-aside">
+    <div>
+        <button
+            title="Skapa ny post (Alt+Ctrl+N)"
+            class="create-new"
+            data-ignore-label="true"
+            data-hotkey="Alt+Ctrl+N"
+            data-icon="ui-icon-document"
+            >
+            Skapa ny post
+        </button>
+    </div>
+
+    <div class="itb-buttonset">
+        <button
+            title="Redigera aktiv (Ctrl+E)"
+            class="mreg-action-button action-edit"
+            data-ignore-label="true"
+            data-hotkey="Ctrl+E"
+            data-icon="ui-icon-pencil"
+            >
+            Redigera aktiv
+        </button>
+        <button
+            title="Uppdatera aktiv (Alt+Ctrl+R)"
+            class="mreg-action-button action-update"
+            data-ignore-label="true"
+            data-hotkey="Alt+Ctrl+R"
+            data-icon="ui-icon-refresh"
+            >
+            Uppdatera aktiv
+        </button>
+        <button
+            title="Kopiera aktiv"
+            class="mreg-action-button action-copy"
+            data-ignore-label="true"
+            data-icon="ui-icon-copy"
+            >
+            Kopiera aktiv
+        </button>
+        <button
+            title="Radera aktiv"
+            class="mreg-action-button action-delete"
+            data-ignore-label="true"
+            data-icon="ui-icon-trash"
+            >
+            Radera aktiv
+        </button>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+Scenarier för medlemsregistret version 1.0
+Skicka ut medlemsinformation
+1. ta fram adressuppgifter till en utvald grupp medlemmar baserat på medlemskap i LS, syndikat, driftsektion, federation, distrikt, valkrets, försenad med avgifterna, omfattas av stridsåtgärd eller annan sökning.
+2. skriva ut etiketter för snigelpostutskick
+alternativt
+skicka e-post till alla som har e-postadresser, snigelpost till övriga
+alternativt
+göra ett sms utskick till alla som har mobilnummer, e-post till de som saknar mobil och snigelpost till de som saknar både sms & e-post övriga
+3. kunna hantera fel i utskick som t ex e-post som studsar, då man kan prova att göra ett omskick av e-post alternativt snigelpost utskick beroende på hur mycket tidsmarginaler man har.
+
+Hantera medlemsinbetalningar
+1. Manuell registrering av inbetalning
+2. autogiro automagisk registrering av inbetalning med felhantering
+3. ocr automagisk registrering av inbetalning med felhantering
+4. göra utskick till medlemmar som släppar xxx månader med avgiften
+5. göra utskick till redogöraren i LS med lista på medlemmar som släppar xxx månader med avgiften
+6. utesluta alla medlemmar som släpar xxx månader med avgiften
+
+Sympatistrejk
+1. snabbt ta fram vilka som är berörda av en LO-strid genom att söka upp alla som omfattas av ett visst kollektivavtal.
+2. kalla alla berörda till strejkmöte enligt "Skicka ut medlemsinformation".
+3. registrera vilka som deltar i striden och därigenom är berättigade till stridsunderstöd
+4. registrera vilka som får stridsunderstöd och hur mycket
+
+Egen strid
+1. ta fram alla som berörs av en strid och kontrollera att de är berättigade till stridsunderstöd.
+2. kalla alla berörda till strejkmöte enligt "Skicka ut medlemsinformation".
+3. registrera vilka som deltar i striden och därigenom är berättigade till stridsunderstöd
+4. registrera vilka som får stridsunderstöd och hur mycket
+
+Rättsärende
+1. kontrollera att medlem xxx är berättigad till rättshjälp (att personen inte ligger efter med avgifterna och att LS inte är satt i karantän).
+
+Hantera LS medlemsredovisning centrala
+1. för de LS som är anslutna till systemet sker detta automatiskt, dvs medlemspengarna fördelas mellan de organisationsenheter som ska ha pengarna; LS, distrikt och centralt
+2. Övriga LS skickar in manuell redovisning och betalar in pengar
+3. Systemet ska skicka ut påminnelser till LS som ligger efter via e-post och snigelpost
+4. Man ska manuellt kunna sätta ett LS i karantän, vilket påverkar en mängd saker i medlemsregistret.
+5.
+
+Göra en ändring i en post
+1. Man ska begära att få göra en ändring i en post genom att klicka på en knapp/länk och då kommer det fram en ruta där man kan redigera i de fält man har behörighet att ändra i.
+2. Ett versionssystem ska lagra ändringar i poster, när de utfördes och av vem.
+3. Vi vill att det lagras fem versioner, dvs de fem senaste ändringarna, men denna siffra ska kunna ändras i inställningarna.
+
+Föra in en ny post/medlem i registret
+1. Kontrollera personnumrets giltighet och om p-numret redan finns i registret
+2. Tilldela ett medlems-ID
+3. När uppgifter om arbetsplats införs ska registret automagiskt kolla om det redan finns medlemmar på den arbetsplatsen.
+
+Studier
+1. Registret innehåller uppgifter om vilka medlemmar som gått vilka studier
+2. Ta fram alla medlemmar i ett LS som inte gått grundkurs och kalla dem till grundkurs
+3.

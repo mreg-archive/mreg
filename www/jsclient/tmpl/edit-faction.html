@@ -1,0 +1,66 @@
+<form class="mreg-edit-dialog mreg-validate">
+    <input type="hidden" name="etag" value="${etag}" />
+    <input type="hidden" name="link" value="${links.edit}" />
+    <input type="hidden" name="title" value="${title}" />
+
+    <div>
+        <label>Tekniskt id</label> <span class="mreg-strong">${id}</span>
+    </div>
+
+    <div>
+        <label>Namn</label>
+        <input type="text" value="${name}" name="name"
+            data-bvalidator="required,alphanum,maxlength[100]" />
+        <br />
+        <label>Beskrivning</label>
+        <input type="text" value="${description}" name="description"
+            data-bvalidator="alphanum,maxlength[100]" />
+    </div>
+
+    <div>
+        <label>Typ</label>
+        <select name="type">
+            <option value="ANNAN" {{if type=='type_faction_ANNAN'}}selected{{/if}}>ANNAN</option>
+            <option value="DISTRIKT" {{if type=='type_faction_DISTRIKT'}}selected{{/if}}>DISTRIKT</option>
+            <option value="LS" {{if type=='type_faction_LS'}}selected{{/if}}>LS</option>
+            <option value="ORTSSEKTION" {{if type=='type_faction_ORTSSEKTION'}}selected{{/if}}>ORTSSEKTION</option>
+            <option value="FEDERATION" {{if type=='type_faction_FEDERATION'}}selected{{/if}}>FEDERATION</option>
+            <option value="SYNDIKAT" {{if type=='type_faction_SYNDIKAT'}}selected{{/if}}>SYNDIKAT</option>
+            <option value="DRIFTSSEKTION" {{if type=='type_faction_DRIFTSSEKTION'}}selected{{/if}}>DRIFTSSEKTION</option>
+            <option value="AVDELNING" {{if type=='type_faction_AVDELNING'}}selected{{/if}}>AVDELNING</option>
+            <option value="KONCERNFACK" {{if type=='type_faction_KONCERNFACK'}}selected{{/if}}>KONCERNFACK</option>
+            <option value="TEMP" {{if type=='type_faction_TEMP'}}selected{{/if}}>TEMP</option>
+            <option value="TEKNISK" {{if type=='type_faction_TEKNISK'}}selected{{/if}}>TEKNISK</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Förälder</label>
+        <input type="text" value="${parentId}" name="parentId"
+            data-bvalidator="required,digit,maxlength[10]" />
+    </div>
+
+    <div>
+        <label>PlusGiro</label>
+        <input type="text" value="${plusgiro}" name="plusgiro"
+            data-bvalidator="validPlusgiro" />
+        <br />
+        <label>Bankgiro</label>
+        <input type="text" value="${bankgiro}" name="bankgiro"
+            data-bvalidator="validBankgiro" />
+    </div>
+
+    <div>
+        <label>Hemsida</label>
+        <input type="text" value="${url}" name="url"
+            data-bvalidator="url,maxlength[500]" />
+        <br />
+        <label>Avatar</label>
+        <input type="text" value="${avatar}" name="avatar"
+            data-bvalidator="url,maxlength[500]" />
+    </div>
+
+    <div>
+        <label>Anteckning</label> <textarea name="notes">${notes}</textarea>
+    </div>
+</form>

@@ -1,0 +1,344 @@
+<h1>Användarmanual webbklient</h1>
+
+<h2>Webbläsare</h2>
+
+<p>Det finns en mängd webbläsare som alla skiljer sig åt. Registret har testats
+med <em>Google chrome</em> och <em>Firefox</em>. Stöd för andra webbläsare kan inte
+garanteras.</p>
+
+<h2>Listor</h2>
+
+<p>Alla grundläggande typer av poster i registret (grupper, medlemmar,
+arbetsplatser osv.) kan visas i listor. En lista kan vara en sökning, en
+virtuell arbetslista, alla medlemmar i ett LS osv. Poster kan flyttas mellan
+listor genom att kopiera till urklipp (mer om det nedan).</p>
+
+<blockquote>
+  <p>Att lägga till en post till listan över ett LS medlemmar är semantiskt samma
+sak som att göra posten till medlem av LS.</p>
+</blockquote>
+
+<p>Poster kan raderas från listor med hjälp av knappen <em>ta bort</em>.</p>
+
+<blockquote>
+  <p>Att ta bort en post från listan över ett LS medlemmar är semantiskt samma
+sak som att avskriva medlemmen.</p>
+</blockquote>
+
+<h3>Arbetslistor</h3>
+
+<p>Arbetslistor existerar endast i webbklienten. Det vill säga ingen motsvarande samling
+existerar i registret. Med hjälp av arbetslistor kan en administratör samla
+poster som en del i arbetsflödet. Exempelvis för att skriva ut etiketter,
+kontroller betalningar osv.</p>
+
+<h3>Att arbeta med urklipp</h3>
+
+<p>Urklipp är en global lista som alltid existerar i bakgrunden. Klicka på knappen
+<em>visa urklipp</em> för att arbeta med den direkt.</p>
+
+<p>När en eller flera poster från vilken lista som helst <em>kopieras</em> så hamnar de i
+urklipp. </p>
+
+<p>När knappen <em>lägg till</em> aktiveras på någon lista så <em>flyttas</em> samtliga poster
+från urklipp till denna lista. På detta sätt kan poster flyttas mellan listor.</p>
+
+<p>Vissa listor kan bara innehålla vissa typer av poster. Det är exempelvis inte
+möjligt att lägga till en grupp till en lista över ett LS medlemmar.</p>
+
+<h2>Sökningar</h2>
+
+<p>Sökningar görs mot ett speciellt sök-index. För att ny eller uppdaterad data
+ska vara sökbar måste det indexeras. Eftersom det är en tidskrävande uppgift
+görs det inte efter varje uppdatering. Istället indexeras databasen automatiskt
+med ett visst tidsintervall.</p>
+
+<blockquote>
+  <p>Det betyder att ny eller ändrad data inte är sökbar innan en ny indexering
+utförts.</p>
+</blockquote>
+
+<p>I nuläget omskapas indexet varje natt. Om det visar sig vara för sällan kan vi
+korta intervallet.</p>
+
+<p>För sökningar används följande syntax:</p>
+
+<ul>
+<li>Varje sökord eftersöks <em>i sin helhet</em> i databasen. Det vill säga <em>malm</em>
+matchar INTE <em>malmö</em>.</li>
+<li>* används som wildcard i slutet av sökord. Det matchar vad som helst. <em>malm*</em>
+matchar exempelvis <em>malmö</em>.</li>
+<li>* kan inte användas i början av ord.</li>
+<li>+ i början av ett sökord gör att endast sökningar som innehåller ordet
+returneras (sökord utan + gör att poster med detta ord värderas högre än andra
+poster, men de utesluts inte).</li>
+<li>- i början av ett sökord gör att inga poster som matchar sökordet returneras.</li>
+<li>Parenteser kan användas för att logiskt gruppera sökord.</li>
+<li>Fraser inneslutna av " eftersöks i sin helhet, det vill säga ej som enskilda
+ord.</li>
+</ul>
+
+<p>För den tekniskt intresserade finns mer information på
+<a href="http://dev.mysql.com/doc/refman/5.0/en/fulltext-boolean.html">mysql.com</a>.</p>
+
+<h3>Avancerade sökningar</h3>
+
+<p>Det finns för närvarande inte något gränssnitt för avancerade sökningar.
+Följande syntax används tills vidare.</p>
+
+<ul>
+<li><strong>+type_member</strong> söker efter endast medlemmar</li>
+<li><strong>+type_faction_*</strong> söker efter endast grupper</li>
+<li><strong>+type_faction_ls</strong> söker efter endast LS (alternativt använd <em>distrikt</em>,
+<em>ortssektion</em>, <em>federation</em>, <em>syndikat</em>, <em>driftssektion</em>, <em>avdelning</em>,
+<em>koncernfack</em>, <em>temp</em> eller <em>teknisk</em>).</li>
+<li><strong>+id_1</strong> söker efter alla poster med id 1 (av ospecificerad typ)</li>
+</ul>
+
+<p>Det går även att söka efter länkad data.</p>
+
+<ul>
+<li><strong>+xref_faction_1_ok</strong> söker efter alla poster som är medlemmar av grupp
+nummer 1 (Stockholms LS).</li>
+<li><strong>+xref_faction_1_*</strong> söker efter alla poster som är eller har varit
+medlemmar av grupp nummer 1.</li>
+<li><strong>+xref_faction_1_* -xref_faction_1_ok</strong> söker efter alla poster som
+har varit men inte längre är medlemmar av grupp nummer 1.</li>
+<li><strong>+xref_member_1_ok</strong> söker efter alla poster som medlem nummer 1 är
+medlem av.</li>
+</ul>
+
+<p>Allt kan kombineras</p>
+
+<ul>
+<li><strong>+type_member +xref_faction_1_ok</strong> söker efter alla medlemmar som är
+medlemmar av grupp nummer 1.</li>
+</ul>
+
+<h3>Medlemssök</h3>
+
+<ul>
+<li><strong>+sex_f</strong> söker efter kvinnor (alternativt <em>m</em> för män eller <em>o</em> för annat
+kön).</li>
+<li><strong>+debitclass_a</strong> söker efter medlemmar i avgiftsklass A.</li>
+<li><strong>+paymenttype_ag</strong> söker efter medlemmar som betalar via autogiro.</li>
+<li><strong>+personalid_NNNNNN-NNNN</strong> söker efter personnummer.</li>
+<li><strong>+workcondition_anstalld</strong> söker efter medlemmar med arbetsvillkor anställd.</li>
+<li><strong>+invoiceflag_1</strong> söker efter medlemmar med förfallna fakturor.</li>
+</ul>
+
+<h3>Söka efter fakturor</h3>
+
+<ul>
+<li><strong>+type_invoice_member</strong> söker efter medlemsfakturor</li>
+<li><strong>+invoice_1</strong> söker efter fakturanummer 1</li>
+<li><strong>+invoice_ocr_133</strong> söker efter faktura med ocr-nummer 133</li>
+<li><strong>+invoice_paid_*</strong> söker efter betalda fakturor</li>
+<li><strong>+invoice_paid_pg</strong> söker efter fakturor som betalats via plusgiro (även
+<em>ag</em>, <em>bg</em>, och <em>k</em> för autogiro, bankgiro och kontant).</li>
+<li><strong>+invoice_printed</strong> söker efter utskrivna fakturor</li>
+<li><strong>+invoice_expired</strong> söker efter förfallna fakturor</li>
+<li><strong>+invoice_locked</strong> söker efter låsta fakturor</li>
+<li><strong>+invoice_blanco</strong> söker efter blanco-fakturor</li>
+<li><strong>+invoice_exported</strong> söker efter fakturor som exporterats till bokföring</li>
+<li><strong>+invoice_ag</strong> söker efter autogiro-fakturor</li>
+<li>byt <em>+</em> mot <em>-</em> för att utesluta kriterier. Exempelvis
+<strong>+type_invoice_member +xref_faction_1 -invoice_paid_*</strong> söker
+efter obetalda fakturor till grupp nummer 1</li>
+</ul>
+
+<h2>Poster</h2>
+
+<p>Poster öppnas på höger sida av arbetsytan. Längst ut till höger av den översta
+knappraden finns en uppsättning knappar för att arbeta med poster. Dessa
+knappar arbetar alltid på den post som för tillfället är öppen.</p>
+
+<ul>
+<li><strong>Redigera</strong> öppnar en dialogruta för att redigera aktiv post.</li>
+<li><strong>Uppdatera</strong> hämtar aktiv post från servern. Detta är användbart för att
+hämta ändringar som gjort på posten sedan den öppnades. Den är inte möjligt
+att spara en post om det finns ändringar som gjorts efter det att posten
+öppnades.</li>
+<li><strong>Kopiera</strong> kopierar posten till urklipp.</li>
+<li><strong>Radera</strong> tar bort posten från registret. Detta är betyder att posten
+verkligen raderas och inte kan återskapas. Var mycket restriktiv med detta.</li>
+</ul>
+
+<h2>Kortkommandon</h2>
+
+<ul>
+<li><strong>Ctrl+F</strong> öppna ny sökning</li>
+<li><strong>Alt+Ctrl+N</strong> skapa ny post</li>
+<li><strong>Ctrl+E</strong> öppna aktiv post för redigering</li>
+<li><strong>Alt+Ctrl+R</strong> hämta senaste versionen av aktiv post</li>
+<li><strong>Alt+Ctrl+B</strong> öppnar bokhållare</li>
+</ul>
+
+<h2>Struliga medlemmar</h2>
+
+<p>Medlemmar med förfallna fakturor flaggas för att underlätta uppföljning. Under
+Ekonomi > Status visas om en medlem ligger efter med betalningar. En röd prick
+betyder att förfallna fakturor finns, en grön prick betyder det motsatta.</p>
+
+<p>Flaggningen uppdateras varje natt då systemet söker igenom fakturaregistret.
+En medlem kan alltså under en kortare tid vara flaggad trots att betalning
+registrerats. Listan över obetalda fakturor är alltid korrekt.</p>
+
+<p>Det går även att söka efter flaggade medlemmar med <strong>invoiceflag_1</strong>.</p>
+
+<h2>Typer av data i registret</h2>
+
+<h3>Personnummer</h3>
+
+<p>Ange personnummer med 10 siffror (6 siffror, avdelare, 4 siffror). För personer
+utan svenskt personnummer ersätts de fyra sista siffrorna av xxxx, alternativt
+xx1x för män eller xx2x för kvinnor. För personer över hundra år används
+plustecken (+) som avdelare mellan datum och födelsenummer, annars används
+bindestreck (-).</p>
+
+<h3>Bankkontonummer</h3>
+
+<p>Används endast med autogiro. Ange konto med clearing- (alltid fyra siffror)
+och löpnummer skiljda med ett kommatecken (,).</p>
+
+<p>Clearingnummer ska alltid anges med fyra siffror. Vissa banker (Swedbank)
+använder clearingnummer med fem siffror. Då är den sista siffran en intern
+kontrollsiffra som inte ingår i det nationella banksystemet. Kontrollsiffran
+ska vid inmatning i registret utelämnas.</p>
+
+<p>Systemet visar bankens namn. Detta läses från clearingnumret. Om bankens namn
+är okänt behöver det inte betyda att kontonumret är felaktigt ifyllt (systemet
+känner inte till alla banker).</p>
+
+<h3>Plusgirokonton</h3>
+
+<p>Ett Plusgironummer kan bestå av lägst två siffror och högst åtta siffror (<em>x-x</em>
+till <em>xxx xx xx-x</em>). Den sista siffran är en kontrollsiffra.</p>
+
+<h3>Bankgirokonton</h3>
+
+<p>Ett bankgironummer består av sju eller åtta siffror (<em>xxx-xxxx</em> eller
+<em>xxxx-xxxx</em>). Den sista siffran är en kontrollsiffra.</p>
+
+<h3>Inkomst och avgiftsklass</h3>
+
+<p>Inkomst anges som månatlig sammanlagd inkomst före skatt (efter sociala
+avgifter).</p>
+
+<p>Om uppgift om inkomst finns kommer avgiftsklass att beräknas baserat på inkomst
+(vid fakturering).</p>
+
+<p>Om uppgift om inkomst saknas kan avgiftsklass anges explicit, och kommer i
+förekommande fall att användas vid fakturering.</p>
+
+<p>Om uppgift om både inkomst och avgiftsklass saknas kommer blanco-fakturor att
+genereras.</p>
+
+<p>För att en medlem ska övergå till blanco-fakturering måste alltså både uppgift
+om inkomst och avgiftsklass tömmas.</p>
+
+<h3>Betalningsvillkor</h3>
+
+<p>Systemet använder sig av följande betalningsvillkor:</p>
+
+<ul>
+<li><strong>AG</strong> (autogiro). Medlemmen betalar via autogiro. Systemet prickar av
+betalningar automatiskt från autogirots rapportfiler.</li>
+<li><strong>BAG</strong> (begär autogiro). Medlemmen önskar betala via autogiro. Generera
+autogirofil och skicka till banken för behandling. (Omvandlas automatiskt
+till BAG-V när autogirofil hämtats från systemet.)</li>
+<li><strong>BAG-V</strong> (begär autogiro väntar på svar). Begäran om autogiro har skickats till
+banken. (Omvandlas automatiskt till AG när klartecken kommer från banken.)</li>
+<li><strong>MAG</strong> (makulera autogiro). Medlemmen önskar inte längre betala via autogiro.
+(Omvandlas automatiskt till MAG-V när autogirofil hämtats från systemet.)</li>
+<li><strong>MAG-V</strong> (makulera autogiro väntar på svar). Begäran om att makulera autogiro
+har skickats till banken. (Omvandlas automatiskt till LS när klartecken kommer
+från banken.)</li>
+<li><strong>PAG</strong> (problem med autogiro).</li>
+<li><strong>LS</strong> Ej autogiro utan betalning direkt till LS.</li>
+</ul>
+
+<h2>Kontaktuppgifter</h2>
+
+<p>Varje post i registret kan ha ett obegränsat antal telefonnummer, mail- och
+vanliga adresser. Varje kontaktuppgift identifieras av ett namn. Detta namn
+fyller ingen teknisk funktion, utan visas endast för att det skall vara enkelt
+att identifiera olika kontaktuppgifter. Det finns inget som hindrar att en
+mailadress kallas för <em>Tele</em>, även om det såklart skulle vara olyckligt.</p>
+
+<p>När en kontaktuppgift öppnas för redigering visas när och av vem uppgiften
+senast sparades. Tidskoden ändras varje gång posten sparas, även om ingenting
+faktiskt ändrades. Använd denna funktion för att markera att en kontaktuppgift
+fortfarande är giltig, exempelvis efter ett telefonsamtal till en medlem.</p>
+
+<h3>Telefonnummer</h3>
+
+<p>Telefonnummer kan matas in i registret i olika format. Följande telefonnummer
+är identiska från systemets perspektiv:</p>
+
+<ul>
+<li>+468123456</li>
+<li>+46-8-123 456</li>
+<li>08-123456</li>
+<li>08123456</li>
+</ul>
+
+<p>Om landskod fylls i måste den föregås av ett <em>+</em>. Om landskod ej fylls i är <em>46</em>
+standard.</p>
+
+<p>Till höger om telefonnummer visas antingen en grön eller en röd prick. Grön
+prick betyder att numret är ett svenskt mobilnummer. När systemet skickar SMS
+eller skriver ut listor över SMS-nummer tas endast dessa nummer med.</p>
+
+<p>Röd prick betyder att numret inte är ett giltigt svenskt mobilnummer.</p>
+
+<p>När telefonnummer öppnas för redigering visas ytterligare information om land,
+område och operatör. Denna information läses från telefonnumret och är ett stöd
+för att organisatören enkelt ska kunna se att allt ser korrekt ut.</p>
+
+<h3>Mailadresser</h3>
+
+<p>Till höger om mailadresser visas antingen en grön eller en röd prick. Grön prick
+betyder att mailadressen är giltig. När systemet skickar mail eller skriver ut
+listor av mailadresser tas endast dessa adresser med. </p>
+
+<p>Röd prick betyder att adressen inte är en giltig mailadress.</p>
+
+<h3>Postadresser</h3>
+
+<p>Postadresser sparas i registret nedbrutna i en mängd fält. Den kompletta
+adressen byggs upp enligt prioriteringsregler från <a href="http://www.sis.se">SIS</a>. För
+att det inte ska bli fel är det viktigt att informationen är ifylld på rätt
+sätt. Kort beskrivning av mindre uppenbara fält:</p>
+
+<ul>
+<li><strong>Förmedlande mottagare</strong> Även känt som care-of eller c/o. För
+care-of-adresser ska <em>mottagarrolluppgift</em> vara <em>c/o</em> och <em>mottagare</em>
+namnet på den förmedlande personen/institutionen.</li>
+<li><strong>Administrativ adress</strong> Kan exempelvis vara en postbox eller poste restante.
+För en boxadress ska <em>Typ av administrativ adress</em> vara <em>box</em> och
+<em>administrativ adress</em> postboxens nummer.</li>
+<li><strong>Uppgång</strong> Exempelvis <em>UH</em> för uppgång höger eller <em>U2</em> för uppgång
+nummer två.</li>
+<li><strong>Våningsplan</strong> Exempelvis <em>NB</em> för nedre botten eller <em>2TR</em> för våning
+nummer två.</li>
+<li><strong>Lägenhetsnummer</strong> Lägenhetsnummer som det skrivs i svensk folkbokföring.
+Endast siffror.</li>
+<li><strong>Extra uppgift</strong> Ett väldigt fritt fält. Kan exempelvis vara <em>mittemot nummer
+50</em> eller <em>50 meter till vänster om huvudingång</em>.</li>
+<li><strong>Landskod</strong> Kod enligt <a href="http://sv.wikipedia.org/wiki/Landskoder">ISO 3166-1</a>,
+där exempelvis <em>SE</em> står för Sverige.</li>
+</ul>
+
+<h2>Kända problem</h2>
+
+<p>Följande begränsningar finns i alpha-versionen:</p>
+
+<ul>
+<li>Att ladda upp filer fungerar endast med Google Chrome.</li>
+<li>Möjligheterna att redigera bokhållare är begränsade</li>
+<li>Listan över medlemmar hos varje grupp kan endast visa 300 poster. För grupper
+med fler medlemmar är den kortsiktiga lösningen att söka efter
+<strong>+type_member +xref_faction_id_ok</strong>, där <strong>id</strong> ersätts med gruppens
+id.</li>
+</ul>

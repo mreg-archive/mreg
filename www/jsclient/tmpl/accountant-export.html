@@ -1,0 +1,23 @@
+<form class="mreg-edit-dialog mreg-validate">
+
+
+    <div class="wider">
+        <label>Endast oexporterade</label>
+        <input type="checkbox" name="fresh" checked="checked" />
+    </div>
+
+    <div class="wider">
+        <br />
+        <label>Från</label>
+        ${(today = new Date()), ''}
+        <input type="text" class="mreg-datepicker" name="from"
+            value="${today.getFullYear()}-01-01"
+            data-bvalidator="minlength[10],maxlength[10]" />
+
+        <br />
+        <label>till</label>
+        <input type="text" class="mreg-datepicker-today" name="to"
+            data-bvalidator="minlength[10],maxlength[10]" />
+    </div>
+
+</form>

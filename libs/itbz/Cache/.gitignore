@@ -1,0 +1,6 @@
+build
+vendor
+composer.phar
+composer.lock
+Cache.sublime-project
+Cache.sublime-workspace

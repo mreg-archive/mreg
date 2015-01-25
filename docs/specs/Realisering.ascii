@@ -1,0 +1,635 @@
+Realisering av medlemsregister
+==============================
+
+==========================
+*Dokumentversion 0.3* +
+*Senast ändrad 2010-10-14* +
+hannes.forsgard@gmail.com
+==========================
+
+
+* (Sedan ver. 0.3) Jag har nu arbetat in och tänkt över det jag och Ola diskuterade vid
+vårat möte. På de ställen jag ändrat eller tillfört något i texten
+har jag markerat det genom att skriva 'sedan ver. 0.3' alternativt
+'ändrat ver. 0.3'.
+
+* På vissa punkter har jag förslag på tillägg eller ändringar av
+Kravspecen, det framgår av texten.
+
+* Strukturen på detta dokument följer Kravspecen och de läses med
+fördel tillsammans.
+
+
+Namn
+----
+
+Registret behöver på sikt ett namn. Föreslag: *Organiseraren*.
+
+
+A. Medlemsregister (ändrad ver. 0.3)
+------------------------------------
+
+Kravspecen fastslår att det ska vara enkelt att ta bort och lägga till
+nya moduler/funktioner i registret. Det betyder bland annat att vi ska
+skapa en datastruktur som är tillräckligt generell för att enkelt kunna
+byggas ut. Vi vill alltså svara på frågan: 'Vilka är de mest grundläggande
+byggstenarna i registret?' Jag har identifierat tre grundläggande
+klasser:
+
+. Medlemmar
+. Grupper
+. Relationer
+
+Den här delen beskriver medlemmar, grupper och relationer behandlas
+under punktern C-H.
+
+Kravspecen definierar 6 olika sorters information vi vill kunna hämta
+om varje medlem. Jag har ingen att invända. Men från ett
+datastrukturperspektiv är det tydligt att de flesta av de punkterna
+inte naturligt tillhör klassen Medlem (för att förtydliga: att jag är
+med i ett LS innebär snarare att det finns en grupp jag har en viss
+relation till). En medlem är en person och beskrivs med egenskaper
+som är knutna endast till personen, inte till organisationen i övrigt.
+
+Om en medlem sparar vi följande information:
+
+. Medlemsnummer, personnummer, namn
+. Kontaktuppgifter (+ när de senast uppdaterades)
+. När medlemmen senast uppderades.
+. Avgiftshantering (kontakt, OCR eller autogiro. Det här är en
+designfråga: Att spara detta här gör att varje medlem endast kan välja
+en betalningsrelation. Ett mer dynamiskt tänk är att låta
+Relationer hantera detta (mer om det senare), men jag tror att det är
+en onödig generalisering.)
+. Relevanta utbildningar
+. Övriga annteckningar (fordon/körkort/vill vara demovakt/kompetenser
+osv. exakt vilka fält som ska vara med bestämmer vi nog enklast någon
+gång när vi ses, se Kravspec A.3, A.4 och A.5).
+. Om medlemmen fått första utskick samt första telefonsamtal (sedan
+ver. 0.3).
+
+
+Nyfikna (sedan ver. 0.3)
+~~~~~~~~~~~~~~~~~~~~~~~~
+En 'nyfiken' är en person som anmält sitt intresse, men som
+inte gått med i något LS. I medlemsregistret innebär det att personen
+står med som medlem (med kontaktuppgifter osv.) men inte har någon
+relation till något LS. Istället har hon en relation till gruppen
+*Nyfikna*.
+
+
+Utbildningar (sedan ver. 0.3)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Olika LS kommer att arrangera olika utbildningar. När ett LS gör en
+utbildning skapar de en grupp med info om utbildningen samt relationer
+till deltagarna, på samma sätt som relationer mellan medlemmar och
+andra grupper fungerar.
+
+Utöver detta vill vi kunna hämta info om vilka medlemmar som gått
+exempelvis en grundutbildning. För att kunna göra det behöver vi veta
+vilka specifika utbildningar som räknas som grundutbildningar. Detta
+gör vi genom att när LS administratören skapar gruppen för den
+specifika utbildningen så skapar hon också en relation mellan
+utbildningen och meta-gruppen 'grundutbildningar'. Vi kan sedan enkelt
+hämta alla medlemmar som är med i någon grupp som är med i gruppen
+grundutbildningar.
+
+
+Konflikter (sedan ver. 0.3)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+En konflikt är en relation mellan vissa medlemmar och en arbetsplats.
+Det är alltså en vanlig relation, men med en speciell flagga för
+'konflikt'.
+
+Ytterligare information om konflikten, alltså hur förhandlingar gått,
+vilka metoder man har använt osv. sparas rimligen på andra sätt än
+i medlemsregistret. 'Håller ni med om det?'
+
+
+
+B. Ekonomiregister
+------------------
+
+I ekonomiregistret registreras en post varje gång en betalning mellan
+någon del av organisationen sker. För att vi ska kunna hantera skulder
+och fodringar krävs att även dessa sparas i registret. Registret
+innehåller alltså två sortes poster, 'betalningar' och 'fakturor'. Vid
+fastställda tidpunkter registreras fakturor i systemet, exempelvis LS
+NN ska betala X kr centralt senast den D/D. Vid varje tidpunkt bestäms
+skuld/fodrning mellan två parter av balansen mellan relevanta
+betalningar och fakturor.
+
+===============================
+*Not till programmeraren:* för att beräkna en skuld ska systemet såklart
+inte behöva addera alla betalningar/skulder från systemets födelse.
+Någon slags avstämning måste göras med jämna mellanrum, förslagsvis
+vid bokslut.
+===============================
+
+
+Kommentarer (sedan ver. 0.3)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* Det måste vara möjligt att justera fakturor i efterhand i de fall en
+medlem fakturerats för hög avgift därför att hon kanske tjänat mer
+tidigare månader.
+
+* Vissa medlemmar har olika inkomst varje månad, och således även
+olika avgift varje månad. Systemet måste kunna hantera dessa personer.
+
+* Vi måste utgå ifrån att pengar inte kommer betalas in centralt
+(detta är bara aktuellt ifall autogiro centraliseras, vilket inte
+är klart ännu). Fakturor kommer alltså att ställas mellan medlemmar
+och LS samt mellan LS och centrala organisationer.
+
+
+Stridsersättning (sedan ver. 0.3)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I ekonomiregistret för vi även in uppgift om utbetald stridersättning.
+Av utbetalningen framgår givetvis till vilken person utbetalningen
+skett, men även vilken arbetsplats/konflikt utbetalningen gäller
+ska framgå.
+
+
+
+C-F. Grupper
+------------
+
+Exempelvis ett LS är i min datastruktur en Grupp. Om grupper sparar vi
+följande information:
+
+. Grupp-id och namn.
+. Kontaktuppgifter (+ när de senast uppdaterades).
+. När gruppen senast uppdaterades.
+. Vilken typ av grupp det är. (En indikator om det här är ett LS, ett
+distrikt, en federation osv..) 
+. Om denna grupp implicerar någon annan grupp. (Att vara medlem av ett
+visst LS kanske gör att en också är medlem i ett Distrikt.)
+. Övriga annteckningar, beskrivning.
+
+Andra delar av organisationen som också beskrivs bra som Grupper: Driftsektion,
+Federation osv. Diverse styrelser, utskott och redaktioner.
+
+================================
+*Not till programmeraren:* Kontaktuppgifter naturaliserar till en egen
+tabell, de är gemensamma för Medlemmar och Grupper.
+================================
+
+
+Extra om sektioner (sedan ver. 0.3)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+En sektion kan i vissa fall tillhöra en annan större sektion. I dessa
+fall är den mindre sektionens medlemmar även medlemmar i den större
+sektionen.
+
+Det kan även finnas avdelningar, vilket är en del av en sektion. En
+avdelning relaterar till sin sektion på samma sätt som den mindre
+sektionen i exemplet ovan.
+
+
+
+G. Arbetsplatsregister
+----------------------
+
+Innehåller arbetsplatser och koncerner (hädanefter endast arbetsplats,
+en arbetsplats implicerar sin koncern). Arbetsplatser beskrivs även de
+väl som Grupper. Men det finns en del extra information vi vill spara
+om arbetsplatser:
+
+. Uppgift om ägare om det inte är samma som kontaktuppgifter
+. LS egna kontaktperson på arbetsplatsen
+. Andra fack och kollektivavtal
+. Uppgift om bransch (vilket skulle kunna vara detsamma som att en
+arbetsplats implicerar en Federation, eller?).
+
+
+Förtydliganden (sedan ver. 0.3)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Det framkom en önskan att jag skulle förtydliga hur koncepten 'medlemmar
+- relationer - grupper' fungerar för arbetsplatser. 
+
+Jag tänker att det går att använda dessa koncept precis som de är
+för arbetsplatser. Dvs. en arbetsplats är en grupp. En medlem har en
+relation till sin arbetsplats.
+
+Det som skiljer en arbetsplats från en grupp som är intern
+är att vi vill spara vissa 'ytterligare' informationer om
+arbetsplatser. Det är dessa ytterligare uppgifter jag listat ovan.
+
+
+
+H. Relationer mellan registren
+------------------------------
+Som Medlem tillhör jag en mängd olika Grupper. Klassen Relation finns
+för att svara på frågan: På vilket sätt är jag med i gruppen? Om en
+Relation sparar vi följande information:
+
+. När upprättades relationen.
+. När (om) avslutades den.
+. När relationen senast uppdaterades.
+. Om relationen är aktiv. (En innaktiv relation
+betyder att LS är satt i karantän, en innaktiv relation mellan en
+Medlem och ett LS betyder att Medlemmen är avskriven.)
+. Vad är min roll i gruppen (är jag medlem, anställd, student osv. Har
+jag någon speciell yrkesroll.)
+. Vad innebär relationen ekonomsikt? (Ska jag betala medlemsavgift,
+eller kanske få lön? Hur mycket?)
+. Avgiftshantering. (Detta gäller relationer centralt. Svarar på: hur
+ska jag betala avgiften? Denna uppgift kan antingen ligga här eller i
+medlemsregistret (se ovan). Att ha den här är mer dynamiskt, olika
+grupper kan ha olika avgifter som betalas på olika sätt. Men jag
+misstänker att det är en onödig generalisering att lägga den här.)
+. Överiga noteringar. (Exempelvis arbetstid.)
+
+En relation är alltid riktad: ett subjekt är medlem i ett objekt.
+Medlemmar är alltid subjekt. Men Grupper kan vara både och. En
+driftsektion är medlem av ett syndikat. osv.
+
+Historik
+~~~~~~~~
+Genom att spara på avslutade relationer sparar vi automatiskt på
+historik.
+
+
+Relationer i praktiken
+~~~~~~~~~~~~~~~~~~~~~~
+Några exempel:
+
+* A blir medlem i ett LS -> A läggs till i som Medlem med kontaktuppgifter.
+->En post i relationstabellen läggs till som länkar mellan A och LS B
+
+* A berättar att hon jobbar på arbetsplats C -> C finns inte som grupp
+-> C läggs till som Grupp med uppgifter om branch osv. -> en
+relation med lön, arbetstid osv läggs till som länkar mellan A och C
+-> A länkas nu med en viss brach och föreslås därför gå med i federation
+D -> LS administratören som ser att detta stämmer klickar i att A
+ska vara med i federation D (Alternativt sker detta automatiskt, det
+är ett designval.)
+
+* A undrar vad hon ska betala i medlemsavgift -> hennes lön kan vi 
+hämta från relationen till C OCH hennes LS finner vi genom relationen
+till B -> utifrån detta kan systemet föreslå en avgift -> denna
+avgift kan såklart manuellt ändras av LS administratören som inser
+att någonting blivit fel.
+
+* A går grundutbildningen -> en relation mellan henne och
+grundutbildningen (E) skapas av vilken det framgår när hon
+går utbildningen
+
+* A är med och startar ett nytt utskott i sitt LS, utskott F -> F läggs
+till i Grupptabellen, med info om kontaktuppgifter och beskrivning ->
+en relation mellan LS och utskott F skapas ->  en relation mellan A
+och F skapas, om A dessutom har en speciell roll i F, säg sektreterare,
+framgår det av relationen -> relationer mellan fler medlemmar och F skapas.
+
+* A vill skicka info till alla i F -> hon loggar in i registret och väljer
+grupp F -> väljer skicka info och systemet sköter resten.
+
+
+
+Några funktioner som faller utanför detta mönster
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Det är inte allt vi vill ha in i registret som enkelt går att beskriva
+på detta sätt.
+
+Pensionärer och sjukskrivna
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Vi vet att A arbetar eftersom hon har en Relation till en arbetsplats,
+C. Men hur blir det med t.ex. pensionärer och sjukskrivna. Om
+rolltillskrivning sker genom grupptillhörighet behöver de vara med i
+gruppen Pensionärer för att från systemets perspektiv vara pensionärer.
+
+* Detta kan vi lösa genom att helt enkelt skapa låtsasgruppen
+Pensionärer, inte helt snyggt men funktionellt.
+
+Motparter
+^^^^^^^^^
+
+Motparter. Om en arbetsplats kan vi såklart spara beskrivande information.
+Men till exempel en advokatbyrå, eller ännu heldre en specifik
+förhandlare, passar inte i mallen.
+
+* Det här känns som en situation där det inte är aktuellt att
+generalisera modellen mer. Utan helt enkelt skapa en separat struktur
+för motparter. Där de helt enkelt sparas med namn och information,
+plus Relationer till arbetsgivare, arbetsplatser mm.
+
+
+================================
+*OBSERVERA:* Detta är en beskrivning av hur registret uppfatter det som
+händer. Hur de faktiska vyer administratörerna arbetar mot ser ut är
+en helt annan fråga. Det viktiga här är att skapa en underliggande
+datastruktur som enkelt kan anpassa sig till organisatoriska och
+andra förändringar.
+================================
+
+
+Problem som kan uppstå
+----------------------
+
+Avgiftshantering vid överflyttning mellan LS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+När en Medlem byter LS påverkas två Relationer. Relationen till det
+gamla LS:et avslutas (med en datumstämpel) och en ny Relation till
+det nya LS:et skapas (med samma datumstämpel). Vid denna tidpunkt
+måste också de fakturor som ligger i ekonomiregistret revideras:
+Fakturor som rör tiden innan datumstämpeln ska betalas till det gamla
+LS:et, fakturer som rör tiden efter ska betalas till det nya. Medlemen
+kommer alltså att ha två separata skuldrelationer, en till varje LS.
+
+Givet att betalningar till LS går via centralt borde detta gå att hantera.
+Jag kan förerställa mig problem med autogiro och summor. Det borde gå
+att lösa med någon slags avstämningsbetalning.
+
+Om betalningar går via LS blir det mer problematiskt. Då får vi antingen
+en situation där medlemen ska betala till två olika LS under en
+övergångstid, vilket vi bara kan hantera om information om
+Avgiftshantering är olika för varje Relation. Eller en skuld mellan två
+LS. Men en skuld som inte på ett enkelt sätt finns representerad i
+ekonomiregistret. Här finns en mängd felkällor som gör det svårare
+att automatisera. För detta skulle jag behöva veta mer exakt hur
+arbetet går till idag, vad som är önskvärt osv.
+
+
+Problem med samtidiga uppdateringar
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+HTTP-protokollet har inbyggda lösningar på detta problem. I korthet
+går det ut på att varje resurs i systemet har en unik tag som uppdateras
+varje gång resursen uppdateras. Och varje gång jag vill uppdatera
+någonting måste jag skicka med aktuell tag. Misslyckas jag med det
+(om min tag inte är aktuell längre) betyder det att resursen
+uppdaterats av någon annan sedan jag laddade ner den. Uppdateringen
+misslyckas. I detta fall kan programmet reagera så som beskrivits i
+Kravspecen, dvs att de båda versionerna kan jämföras.
+
+Detta kallas för på programeringsjargong för 'Optimistic concurrency
+control'. Det som beskrivis i Kravspecen (dvs. att en post ska låsas
+en viss tid för uppdatering osv.) kallas 'Pessimistic concurrency
+control'. Detta sätt att arbeta fungerar också, men ställer andra och
+mycket mer komplicerade krav på systemet. Fler felkällor.
+
+=========================
+*Förslag till Kravspecen:* Att vi använder 'Optimistic concurrency
+control' för att hantera problem med samtidig uppdatering.
+=========================
+
+
+I. Behörighetshantering
+-----------------------
+
+. Alla har tillgång till info om grupper (men inte om vilka som är med).
+. Administratörer för Grupper får ändra en medlems uppgifter (Det
+innebär att både administratören för LS B och federation D kan ändra
+A:s kontaktuppgifter.)
+. Centrala användare har tillgång till hela registret eller vissa
+Grupper (de är administratörer för många grupper).
+. Administratörer ska kunna skapa 'ringa-runt-användare' med speciella
+inställningar.
+. I överigt vill vi vara försiktiga med vem som får skapa nya användare.
+Om någon administratör sumpar sitt lösenord är en viss del av registret
+i farozonen. Men om den som tränger in i registret dessutom lyckas
+skapa nya användare kan det leda till problem över lång tid.
+
+=========================
+*Förslag till Kravspecen:* Att vi har endast en (eller max ett par)
+'superanvändare' som kan skapa andra administratörer. Att dessa
+användare inte används för det dagliga arbetet (till det har vi
+vanliga administratörer med anpassade rättigheter).
+=========================
+
+
+
+J. Säkerhet
+-----------
+
+Förslagen i Kravspecen är bra. De är formulerade från ett
+systemadministratörs-perspektiv. Säkerhetstänkandet har även en andra,
+komplettande, sida. Alltså programmerarens perspektiv. Det handlar om
+på vilka sätt vi sparar data i databaser. Hur vi hanterar inloggnings-
+sessioner och olika kända typer av attacker som XSS och CSRF.
+
+Det känns onödigt att jag skriver långt om dessa bitar här. Jag vill
+bara lyfta att detta också är en del av arbetet samt att jag kommer
+producera en massa tänk om det (se tidsplaneringen).
+
+
+Att använda olika datorer (sedan ver. 0.3)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Om vi i förväg vet att en administratör endast kommer att använda en
+eller ett par datorer i sitt arbete har vi möjlighet att höja
+säkerheten genom att komplicera instalationsprocessen något.
+
+Tekniken går ut på att förutom att skapa ett lösenord måste varje
+användare göra en enkel installation i sin dator för att kunna
+använda den att logga in med. En dator som inte är installerad på rätt
+sätt kan inte användas, även om en har rätt lösenord.
+
+=========================
+*Förslag till Kravspecen:* Att vi på detta sätt kräver att varje
+användare följer denna installationsprocess.
+=========================
+
+
+Spara ändringar (sedan ver. 0.3)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Systemet ska även spara information om ändringar. Vad som ändrats, när
+samt av vem.
+
+Detta av dubbla anledningar: dels är det viktigt att kunna ångra
+ändringar som blivit fel.
+
+Dels fyller det en viktig pedagogisk poäng att användare kan se att
+systemet sparar info om vem som ändrat vad; det gör antagligen att
+de blir konservativa med att göra ändringar de är osäkra på.
+
+
+
+K. Rapporter och statistik
+--------------------------
+
+Ekonomisk statistik
+~~~~~~~~~~~~~~~~~~~
+Från ekonomiregistret.
+
+Märkta medlemmar
+~~~~~~~~~~~~~~~~
+Detta implementerar vi enkelt som Grupper.
+
+
+
+L-N.
+----
+Inga speciella kommentarer i nuläget. Ser bra ut.
+
+
+
+Tankar om layout (kommer fyllas på efterhand)
+---------------------------------------------
+
+Här har jag samlat några spridda tankar om layouten. Mest för att de
+inte ska glömmas bort framöver. Det här är ett arbete vi måste
+göra tillsammans.
+
+. Enkla och *tydliga* arbetsvyer. Undvik massa flikar som gör att det
+känns rörigt.
+. Information om en medlem kan vara komprimerad, allt behöver inte
+presenteras i editerbara formulärfält.
+. Det ska vara tydligt vad olika knappar betyder och gör.
+
+
+
+Handbok (sedan ver. 0.3)
+------------------------
+
+I samband med dokumentationen behöver vi skapa en handbok som beskriver
+alla funktioner arbetsvyerna innehåller. Handboken kan rikta sig till
+den lite mer avancerade användaren. Det viktiga är att det finns en
+komplett dokumentation från ett användarperspektiv.
+
+
+
+LDAP (sedan ver. 0.3)
+---------------------
+
+Jag föreslår av vi använder LDAP för att skapa användarnamn och
+lösenord för inlogg i andra system.
+
+Kravspecen föreslår även OpenID. OpenID har skapats för att lösa ett
+liknande, men i grunden annorlunda problem. Med OpenID är det tänkt
+att användare ska kunna registrera sig på någon openID server för
+att sedan använda samma inloggningsuppgifter i alla tjänster som
+stödjer tekniken. Detta framförallt för att användaren inte ska behöva
+memorera massa olika lösenord.
+
+Vi vill istället skapa en centraliserad katalog för internwebb, mail
+och liknande där vi har kontroll över uppgifterna och kan stänga
+av en användare som inte längre är medlem osv. För detta passar LDAP.
+Det finns dessutom ett väl etablerat api för PHP vilket gör
+utvecklingen tämligen smärtfri.
+
+För att uppfylla kravspecens krav på att servern som kör
+medlemsregistret endast ska kommunicera över en port måste LDAP-
+katalogen köras på en annan server.
+
+Posterna i LDAP-katalogen bör
+innehålla så lite information som möjligt, för att minimera problem
+med att samma information finns både i medlemsregistret samt i
+LDAP-katalogen. Jag föreslår att LDAP-katalogen endast innehåller
+information om:
+
+. Användarnamn för mail.
+. Medlemsnummer
+. Lösenord 
+
+'Om det finns annan information som behöver vara tillgänglig via
+exempelvis internwebb så meddela mig.'
+
+
+
+Skiss av arbetsvyer (sedan ver. 0.3)
+------------------------------------
+
+I tidsplanen har vi tidigarelagt arbetet med att ta fram arbetsvyer.
+Detta för att vi insett att arbetet blir konkret först när vi kan
+titta på papper över hur det kan komma att se ut.
+
+För att komma igång med detta arbete kommer jag att börja skissa på
+några vyer. De kommer att vara första utkast ämnade att föra en
+vidare diskussion utifrån.
+
+
+
+
+Tidsplan (ändrad ver. 0.3)
+--------------------------
+
+Jag har skissat på följande tidsplan. Den bygger på att jag arbetar
+kontinuerligt på halvtid under sex månader. Detta kommer i verkligheten
+att variera, ibland kommer jag arbeta med detta heltid, ibland kommer
+jag att göra annat. Jag tror att det är bra att vi har en löpande
+kommunikation om det.
+
+Under projektets gång tänker jag att vi kommer producera ett antal
+dokument som både dokumenterar systemet samt fungerar som avstämningar.
+I planeringen har jag markerat dessa dokument med **.
+
+Jag har även specificerat följande 'underprojekt':
+
+. Specifikation av projektet
+. Design av databas.
+. Skapa REST-bibliotek. (Det här är den grundläggande strukturen för
+kommunikation mellan registret och arbetsvyerna.)
+. Annan PHP programmering. (En typisk slaskgrupp som innehåller alla
+möjliga mindre och större problem som behöver lösas för att allt ska
+flyta ihop bra.)
+. Användarhantering + kommunikation med LDAP server.
+. Grafisk profil för användarvyer
+. Impelementation av användarvyer
+. Installation av server
+. Ekonomifunktioner (Bankgiro, OCR, rapporter).
+. Arbete med test och referens-grupper.
+. Arbete med att rätta till buggar.
+. Skriva handbok (v. 0.3)
+
+Redan nu kan jag flagga för vissa komponenter jag är tveksam om jag
+kommer hinna inom ramen för projektet: (Men det är bara lösa tankar,
+vi tar en diskussion om det samtidigt som vi diskuterar igenom
+tidsplanen.)
+
+. Kommunikation med Mail-server. Det är önskvärt att systemet inte
+bara kan skicka mail, utan även reagera automatiskt om ett mail inte
+går fram. Känns svårt att hinna.
+
+
+Planen
+~~~~~~
+*Projektstart:* 1:a okt.
+
+*Projektet färdigt:* Sista mars. (Det är svårt för mig att säga det
+exakt nu. Men jag har utgått från det i min planering och det känns
+rimligt. Sen kommer projektet såklart att ha vissa barnsjukdommar. Att
+fullskaligt gå över till registret är antagligen aktuellt först till
+sommaren.)
+
+*Okt.* Specifikation av projektet.
+
+*Okt.* ** Spec av användarvyer. Detta blir också ett förarbete
+till handboken. (Tidigarelagt ver. 0.3.)
+
+*Mitten av okt. - 1:a nov.* Design av databas.
+
+*Sista okt.* ** Specifikation fastslagen
+
+*Nov och dec* ** Arbete med grafiskt profil (stort tiddspann därför
+att jag inte vet när och hur Mats har möjlighet).
+
+*Nov.* REST-bibliotek.
+
+*Dec.* Användarhantering + kommunikation med LDAP server. ** Dokumentation
+av LDAP katalogen.
+
+*Dec.* Annan PHP programmering. (Kommer absolut kunna brytas ner i
+mindre delar.) ** Dokumentation.
+
+*Dec.* Ekonomifunktioner
+
+*1:a jan.* ** Mjukvaruspec. för server klar. Utifrån det borde det
+vara möjligt att lösa hårdvarufrågan.
+
+*1:a jan.* ** Säkerhutsutvärdering från programmerarperspektiv
+
+*Jan.* Implementation av användarvyer.
+
+*1:a feb.* Hårdvara på plats.
+
+*Första halvan av feb.* Installation på server. Felsökning.
+
+*15:e feb.* ** Säkerhetsutvärdering server. Lever vi upp till allt
+i kravspec. Hur ser servern ut nu?
+
+*Mitten av feb. till mitten av mars* Arbete med test och referens-grupper.
+
+*Andra halvan av mars.* Tid för oförutsedda fel.
+
+*Sista mars.* ** Sammanställning av dokumentation. ** Samsanställning
+av handbok.
+

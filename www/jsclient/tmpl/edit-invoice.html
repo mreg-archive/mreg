@@ -1,0 +1,75 @@
+<form class="mreg-edit-dialog mreg-validate">
+    <input type="hidden" name="etag" value="${etag}" />
+    <input type="hidden" name="link" value="${links.edit}" />
+    <input type="hidden" name="title" value="${title}" />
+
+    <div class="wider">
+        <label>Fakturaummer</label> <span class="mreg-strong">${id}</span>
+        <br />
+        <label>Summa</label>
+        <span class="mreg-strong">
+            {{if isBlanco}}
+                blanco
+            {{else}}
+                ${amount}
+            {{/if}}
+        </span>
+    </div>
+
+    {{if isLocked}}
+        <span class="mreg-error">Kan ej redigera låst faktura</span>
+    {{else}}
+        <div class="wider">
+            <label>Fakturatext</label>
+            <input type="text" value="${description}" name="description"
+                data-bvalidator="maxlength[500]" />
+        </div>
+
+        {{if !isPaid}}
+            <div class="wider">
+                <label><strong>Betala</strong></label>
+                <select name="paidVia">
+                    <option value="">välj betalkanal</option>
+                    <option value="K">Kontant</option>
+                    <option value="PG">PlusGiro</option>
+                    <option value="BG">Bankgiro</option>
+                    <option value="AG">Autogiro</option>
+                </select>
+                <br />
+                <label>summa</label>
+                <input type="text" name="paidAmount"
+                    data-bvalidator="maxlength[11],validAmount" />
+                <br />
+                <label>datum</label>
+                <input type="text" class="mreg-datepicker-today" name="tPaid"
+                    data-bvalidator="minlength[10],maxlength[10]" />
+                <br />
+                <label>fakturera fordran</label>
+                <input type="checkbox" name="billClaim" checked="checked" />
+            </div>
+        {{/if}}
+        
+        {{if !isPrinted}}
+            <div class="wider">
+                <label><strong>Utskriven</strong></label>
+                <input type="checkbox" name="markAsPrinted" />
+            </div>
+        {{/if}}
+
+        {{if !isExported}}
+            <div class="wider">
+                <label><strong>Exporterad</strong></label>
+                <input type="checkbox" name="markAsExported" />
+            </div>
+        {{/if}}
+
+        {{if !isExpired}}
+            <div class="wider">
+                <label><strong>Förfaller den</strong></label>
+                <input type="text" class="mreg-datepicker"
+                    value="${tExpire}" name="tExpire"
+                    data-bvalidator="minlength[10],maxlength[10]" />
+            </div>
+        {{/if}}
+    {{/if}}
+</form>

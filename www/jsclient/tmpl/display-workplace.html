@@ -1,0 +1,128 @@
+
+<!--
+        OBS! Detta template har fortfarande den gamla formen
+
+        skriv om..
+        
+        lägg till
+            unions
+            employees
+            collectiveAgreements
+            tCreated
+            tModified
+
+        -->
+
+
+<ul class="resource_nav_list">
+	{{if id}}
+		<li><a target=".main" class="current">Start</a></li>
+	{{/if}}
+
+	{{if id}}
+		<li><a class="submenu">Kontakt ▼</a>
+			<ul>
+				{{if phones}}<li><a target=".phones">Telefon</a></li>{{/if}}
+				{{if mail}}<li><a target=".mail">Mail</a></li>{{/if}}
+				{{if addresses}}<li><a target=".addresses">Adresser</a></li>{{/if}}
+			</ul>
+		</li>
+	{{/if}}
+
+	{{if links['/mreg/rels/members']}}
+		<li><a class="loadPreviewList" target=".members" href="${links['/mreg/rels/members']}">Medlemmar</a></li>
+	{{/if}}
+
+	{{if links['/mreg/rels/factions']}}
+		<li><a class="loadPreviewList" target=".factions" href="${links['/mreg/rels/factions']}">Grupper</a></li>
+	{{/if}}
+
+	{{if id}}
+		<li><a class="submenu">Arbetsplatser ▼</a>
+			<ul>
+				{{if links['/mreg/rels/parents']}}
+					<li>
+						<a class="loadPreviewList" target=".parents" href="${links['/mreg/rels/parents']}">
+							Föräldragrupper
+						</a>
+					</li>
+				{{/if}}
+
+				{{if links['/mreg/rels/children']}}
+					<li>
+						<a class="loadPreviewList" target=".children" href="${links['/mreg/rels/children']}">
+							Undergrupper
+						</a>
+					</li>
+				{{/if}}
+			</ul>
+		</li>
+	{{/if}}
+
+	{{if id}}
+		<li><a class="submenu">Extra ▼</a>
+			<ul>
+				{{if mode}}<li><a target=".meta">Meta</a></li>{{/if}}
+				{{if links['/mreg/rels/revisions']}}
+					<li>
+						<a class="load_table" target=".revisions" href="${links['/mreg/rels/revisions']}">
+							Ändringar
+						</a>
+					</li>
+				{{/if}}
+			</ul>
+		</li>
+	{{/if}}
+</ul>
+
+<p><div class="clear"></div></p>
+
+
+<!-- MAIN FORM -->
+<form>
+	{{if id}}<input type="hidden" value="${id}" name="id">{{/if}}
+
+
+	<!-- EMPTY AREAS FOR ON DEMAND CONTENT -->
+	<div class="members type_area"></div>
+	<div class="factions type_area"></div>
+	<div class="parents type_area"></div>
+	<div class="children type_area"></div>
+	<div class="revisions type_area"></div>
+
+
+	<!-- MAIN -->
+	<table class="main type_area">
+		<colgroup>
+			<col class="first" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Namn</th>
+				<th scope="col">Parent</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{{if id}}${id}{{else}}Ny arbetsplats{{/if}}</td>
+				<td>
+					{{if name}}
+						<a class="edit" data-name="name" title="redigera">${name}</a>
+					{{else}}
+						<input type="text" name="name">
+					{{/if}}
+				</td>
+				<td>
+					{{if parentId}}
+						${parentId}
+					{{else}}
+						Ange id för parent. Kommer att bli någon snygg rullist i framtiden..
+						<input type="text" name="parentId">
+					{{/if}}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</form>

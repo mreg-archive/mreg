@@ -1,0 +1,26 @@
+<div class="worklist">
+    <table>
+         <thead>
+            <tr>
+                <th></th>
+                <th>Namn</th>
+                <th>Id</th>
+                <th>Typ</th>
+                <th>Url</th>
+                <th>Beskrivning</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{each(index, item) items}}
+                <tr>
+                    <td></td>
+                    <td>${item.title}</td>
+                    <td>${item.id}</td>
+                    <td>${item.type}</td>
+                    <td>${item.uri}</td>
+                    <td>${item.description}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

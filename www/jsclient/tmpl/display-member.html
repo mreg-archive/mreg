@@ -1,0 +1,177 @@
+<section class="mreg-entity">
+    <input type="hidden"
+           name="mreg-entity-title"
+           value="${title}" />
+    <input type="hidden"
+           name="mreg-entity-id"
+           value="${id}" />
+    <input type="hidden"
+           name="mreg-entity-type"
+           value="${type}" />
+    <input type="hidden"
+           name="mreg-entity-uri"
+           value="${links.edit}" />
+    <input type="hidden"
+           name="mreg-entity-description"
+           value="${ls}" />
+
+
+    <!-- avatar -->
+    <div class="avatar ui-widget-content">
+       <div title="Redigare avatar för att ändra bild">
+           <img src="${avatar}" />
+       </div>
+    </div>
+    <!-- end avatar -->
+
+
+    <!-- header -->
+    <header>
+        <h1>
+            <span class="name">${title}</span>
+            <span class="id">${id}</span>
+        </h1>
+
+        <div>
+            <em>${ls}</em><br />
+        </div>
+
+        <div>
+            <span class="mreg-strong">
+                {{if sex=='M'}}Man{{else sex=='F'}}Kvinna{{else sex=='O'}}Annan{{/if}}
+            </span>
+        </div>
+
+        <div class="mreg-section mreg-hidden">
+            <div>
+                Personnummer <span class="mreg-strong">${personalId}</span>
+            </div>
+            {{tmpl($data) "tmpl/list-meta.html"}}
+        </div>
+
+        <button class="mreg-button mreg-toggle-section">+</button>
+    </header>
+    <!-- end header -->
+
+
+    <!-- contacts -->
+        {{tmpl($data) "tmpl/list-contacts.html"}}
+    <!-- end contacts -->
+
+
+    <!-- economy -->
+    <ul class="mreg-section-float">
+        <h2>Ekonomi</h2>
+        <li>
+            <label>Status</label>
+            {{if invoiceFlag}}
+                <span class="ui-icon mreg-icon-error"
+                      title="Förfallna fakturor finns"
+                       />
+            {{else}}
+                <span class="ui-icon mreg-icon-valid"   
+                      title="Inga förfallna fakturor"
+                      />
+            {{/if}}
+        </li>
+        <li>
+            <label>Bankkonto</label>
+            <span class="mreg-strong">${bankAccount}</span>
+            <span class="mreg-strong">${bank}</span>
+        </li>
+        <li>
+            <label>Lön</label>
+            <span class="mreg-strong">${salary}</span>
+        </li>
+        <li>
+            <label>Avgiftsklass</label>
+            <span class="mreg-strong">${debitClass}</span>
+        </li>
+        <li>
+            <label>Betalar via</label>
+            <span class="mreg-strong">${paymentType}</span>
+        </li>
+        <li>
+            <label>Arbetssituation</label>
+            <span class="mreg-strong">${workCondition}</span>
+        </li>
+    </ul>
+    <!-- end economy -->
+
+
+    <div style="clear:both;">&nbsp;</div>
+
+
+    <!-- notes -->
+    <div class="mreg-section-float">
+        <h2>Anteckningar</h2>
+        <div class="mreg-strong mreg-textarea">
+        {{if notes}}
+            ${notes}
+        {{else}}
+            <em>Anteckningar saknas</em>
+        {{/if}}
+        </div>
+    </div>
+    <!-- end notes -->
+
+
+    <!-- content row -->
+    <div class="mreg-content-row">
+
+        <!-- factions -->
+        <div>
+            <input type="hidden"
+                   name="mreg-factions-url"
+                   value="${links['/mreg/rels/factions']}" />
+            <h2>Grupper</h2>
+            <button class="mreg-button mreg-float-parent mreg-toggle-section">
+                +
+            </button>
+            <div class="mreg-section mreg-hidden">
+                {{tmpl($data) "tmpl/table-factions.html"}}
+            </div>
+        </div>
+        <!-- end factions -->
+
+        <!-- history -->
+        <div>
+            <input type="hidden"
+                   name="mreg-history-url"
+                   value="${links['/mreg/rels/history']}" />
+            <h2>Historik</h2>
+            <button class="mreg-button mreg-float-parent mreg-show-history">
+                +
+            </button>
+            <div class="mreg-section mreg-hidden mreg-history-content"></div>
+        </div>
+        <!-- end history -->
+
+        <!-- invoices -->
+        <div>
+            <h2>Obetalda fakturor</h2>
+            <button class="mreg-button mreg-float-parent mreg-toggle-section">
+                +
+            </button>
+            <div class="mreg-section mreg-hidden">
+                {{tmpl($data) "tmpl/table-invoices.html"}}
+            </div>
+        </div>
+        <!-- end invoices -->
+
+        <!-- revisions -->
+        <div>
+            <h2>Ändringar</h2>
+            <button class="mreg-button mreg-float-parent mreg-toggle-section">
+                +
+            </button>
+            <div class="mreg-section mreg-hidden">
+                {{tmpl($data) "tmpl/table-revisions.html"}}
+            </div>
+        </div>
+        <!-- end revisions -->
+
+    </div>
+    <!-- end content row -->
+    
+</section>

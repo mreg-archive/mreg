@@ -1,0 +1,169 @@
+Kravspec för medlemsregister
+Version 1B | 2010-09-14
+
+Medlemsregistret ska vara moduluppbyggt, så att det ska vara lätt att ta bort och lägga till nya moduler
+
+Systemet består av
+A. Medlemsregister
+B. Ekonomiregister (avgifter, stridsfond etc)
+C. LS-register
+D. Driftsektionsregister
+E. Syndikatsregister
+F. Federationsregister
+G. Arbetsplatsregister
+H. Relationer mellan registren
+I. Behörighetshantering
+J. Säkerhet
+K. Rapporter / Statistik
+L. Specialfunktioner
+M. Ändringar av befintlig post i registret
+N. Uppgifter är färskvara
+
+A. Medlemsregistret ska bestå av olika delar/moduler
+1. Kontaktuppgifter (Post, tele, mobil, e-post, sms, twitter, facebook etc)
+2. Avgiftshantering (kontant, ocr, autogiro)
+3. LS-organisering (LS, ortsektion, styrelse, studier, organisatör, redaktör, anställd, etc)
+4. Branschorganisering (arbetsplats, driftsektion, syndikat, koncernfack, federation, stridsunderstöd, rättshjälp)
+5. Kompetens, erfarenhet och utbildning (utbildningar, uppdrag, erfarenheter)
+6. Uppdrag i centralorganisationen (ideellt, avlönat)
+
+B. Ekonomiregister
+Här lagras alla ekonomiska transaktioner och medlemsavgifter.
+- Medlemmars betalningar och eventuella skulder till LS
+- LS betalningar och eventuella skulder centralt
+- LS betalningar och eventuella skulder till Distrikt
+- Centrala eventuella skulder LS
+- Betalningar från stridsfond till LS
+
+C. LS-register
+Alla LS i ett eget register/tabell/vy.
+- Alla med inlogg ska kunna se uppgifter om andra LS som kontaktuppgifter och vilka som sitter i styrelsen och medlemsantal.
+
+D. Driftsektionsregister
+Alla driftsektioner i ett register/tabell/vy.
+
+E. Syndikatsregister
+Alla syndikat i ett eget register/tabell/vy.
+
+F. Federationsregister
+Alla medlemmar, syndikat och driftsektioner ska tillhöra en federation vare sig den fungerar eller ej.
+- Federationsregistret ska även kunna hantera andra "konstellationer" som koncernfackliga nätverk m.m.
+
+G. Arbetsplatsregister
+Alla arbetsplatser i ett eget register/tabell/vy.
+- Alla orter med ett fungerande LS registrerar sina företag/arbetsplatser samt arbetsplatser som är intressanta att etablera sig på ur organiseringssynpunkt.
+- Kontaktuppgifter för arbetsplatsen och ägare om de är olika
+- Uppgifter om företaget/arbetsplatsen ingår i en större koncern, t ex har vi arbetsplatsen McDonalds Fridhemsplan som ingår i koncernen McDonalds Sverige
+- Ifall man väljer att titta på en koncern så ska man få en lista på alla arbetsplatser/företag som ingår i koncernen som finns i vårt arbetsplatsregister och hur många medlemmar vi har på respektive arbetsplats.
+- Alla med rättigheter i registret ska kunna se alla arbetsplatser även om de saknar rättigheter att se de medlemmar som jobbar på arbetsplatsen. T ex ska en organisatör i Malmö kunna kolla igenom de tre Postkontor som vi har medlemmar på i Göteborg och se hur många medlemmar vi har på respektive arbetsplats, även om organisatören inte har rätt att se medlemmar i Göteborgs LS. I de fall det finns en officiell kontaktperson på en arbetsplats, så kan man se vem det är och få tillgång till namn, e-post och mobilnummer.
+- Driftsektion som finns på arbetsplatsen, vilken bransch arbetsplatsen tillhör (Federation och syndikat).
+- Andra fack och kollektivavtal på arbetsplatsen
+- Här registrerar vi också alla motparter, dvs företagets egna förhandlare, arbetsgivarorganisationens förhandlare och advokater, så att man kan söka på dem och få info om tidigare fall de varit inblandade i.
+
+H. Relationer mellan registren
+- Alla medlemmar tilldelas ett medlems-ID och registreras i ett LS.
+- Alla medlemmar med jobb kopplas till en arbetsplats i arbetsplatsregistret.
+- I de fall det finns en driftsektion, så kopplas den till de medlemmar som driftsektionen har, den länkas även till en arbetsplats och till federation samt till ett syndikat ifall det finns på orten.
+- Arbetsplatser i arbetsplatsregistret länkar till de medlemmar som jobbar där, samt en driftsektion i de fall en sådan existerar. (Samt eventuellt till de fackliga organisationer som finns där och gällande kollektivavtal)
+
+I. Problem som kan uppstå
+- Överflyttning mellan två LS och avgiftshanteringen och eftersläpning vid flytt.
+- Vi räknar med att systemet ska ha cirka 100 användare och det kan då hända att två personer redigerar samma post samtidigt, systemet måste kunna säkerställa att sådana konflikter inte leder till att information förloras genom t ex versioning och varningar. En möjlighet är t ex att låsa en post i 10 minuter när någon väljer att redigera den, samt att informera om att en annan version publicerades för 3 minuter sedan av användare XXX när man trycker på "uppdatera" knappen. Då ska man kunna ta upp båda versionerna bredvid varandra och jämföra innehållet.
+
+I. Behörighetshantering
+Systemet ska ha ett dynamiskt system för behörigheter
+- Admin - kommer åt alla medlemmar och alla funktioner.
+- Central-användare, kan se och redigera vissa delar av alla medlemmar
+- LS-användare, kan redigera LS-egna medlemmar
+- Federation/Syndikat/sektion ska kunna se och redigera sina egna medlemmar.
+- Lösa konflikter mellan de olika inloggen
+- Registret ska kunna hantera en "ringa-runt-funktion" där en ringlista skapas utifrån en sökning, där t ex 5 pers ringer 150 medlemmar och var å en bara kan se de 30 som man själv ska ringa. Administratörer för den medlemsgrupp (LS, syndikat etc) man ringer inom kan se hur långt var och en kommit i sitt ringande. Kunna skapa temporära speciella ringa-runt-inlogg som bara ger access till ens ringlista?
+
+J. Säkerhet
+Systemet ska vara så säkert som det bara är möjligt.
+- Public key system for utbyte av krypteringsnycklar
+- Krypteringsnycklar med hög säkerhet t ex AES-256 bitar
+- Använda PKI-standarden och X.509-certifikat / kryptering
+- Tvinga användare att ha starka lösenord som måste ändras med visst intervall
+- Dedikerad datorserver med så få programvaror som möjligt
+- Datorserver placerad bakom brandvägg med endast en öppen port
+
+K. Rapporter (Statistik )
+Kunna ta fram olika former av statistik.
+- ekonomisk statistik i form av års och månadsrapporter
+- medlemsstatistik i form av års och månadsrapporter
+- några fasta rapporter som vi kravspecar
+- man ska kunna skapa grupper som man "märker" medlemmar med och som kan låsas (inga nya kan anslutas) eller avslutas (makeringen raderas) och sedan ska man kunna göra statistik på medlemmarna i gruppen. T ex ska man kunna "märka" alla som deltog i en strejk och fick stridsunderstöd och sedan se hur många som fortfarande är medlemmar 3 år senare. Andra tänkbara "märkningar" är gruppövergångar, de som gått med under en värvningskampanj etc.
+- man ska kunna ta fram statistik på alla som gått intro och fackliga utbildningar jämfört med de som inte gjort det. Alla som fått stridsunderstöd, rättshjälp, förhandlingshjälp etc. Även de som förnekats hjälp ska det gå att ta fram.
+
+L. Speciella kommunikationsfunktioner
+- Tillfällig inloggning för ringare
+- Kunna skicka ut sms till en lista med medlemmar
+- Kunna skicka ut e-post till en lista med medlemmar
+- Kunna skicka ut snigelpost till en lista med medlemmar
+- Vara förberedd för att implementera nya kommunikationsfunktioner som t ex twitter och facebook.
+- Man ska även kunna göra utskick enligt en prioritetslista t ex i första hand e-post i andra hand snigelpost eller i första hand sms, i andra hand e-post i tredje hand snigelpost. Den första prioritetslistan är kostnadseffektiv och miljövänlig, den andra listan prioriterar snabbhet.
+- Ytterligare en priolista som i första hand är kostandseffektiv i andra hand snabb ser ut så här; 1. e-post 2. sms till de som saknar e-post eller vars e-post studsar 3. snigelpost
+- genom att ange kostnader för de olika kommunikationssätten ska man även kunna få en dialogruta som anger/varnar för utskickets kostnad.
+
+M. Ändringar av befintlig post i registret
+Man ska INTE kunna skriva rakt in i registret utan går via ett "filter", typ en "ruta" som gör en sökning för att se om någon/något matchar uppgiften, t ex uppgiften finns redan i registret, lista på andra medlemmar på samma arbetsplats etc. Efter att sökningen är gjord och träffilsta presenterad väljer man hur man agerar, skapa ny post, välja befintlig eller redigera någon befintlig från träfflistan.
+
+N. Uppgifter är färskvara
+Uppgifter om mobilnummer, var man bor och var man jobbar är färskvara. Vi måste ha ett system för att skilja mellan uppgifter som är färska och pålitliga och uppgifter som är gamla och opålitliga. Därför bör alla ändringar i registret datummärkas i synnerhet uppgifter om var man jobbar, e-postadress, bostadsadress och telefonnummer. Dessutom ringer man runt till medlemmar och får då ofta bekräftat att uppgifterna stämmer, man ska då kunna trycka på en knapp och ändra datummärkningen till dagens datum.
+
+
+A. Medlemsregistret
+
+1. Kontaktuppgifter
+- Aktuell postadress
+- Hemtel, mobiltel
+- E-post
+- Facebook, twitter, bloggar etc
+- Kunna koppla till LDAP-server eller Open-ID som möjliggör samma inlogg i alla system och att vi kan stänga av samtliga inlogg när personen lämnar organisationen.
+- När kontaktuppgifterna kontrollerats i samband med runtringning, så ska man kunna "stämpla" posten som kontrollerad.
+- Ska gå att skicka sms och e-post direkt från registret till flera medlemmar
+- Brevmall för snigelpost som lagrar sändlistor
+- Ska vara lätt att uppdatera kontaktuppgifter
+
+2. Avgiftshantering
+- Ska gå att göra manuella korrigeringar
+- Ska kunna läsa in OCR-filer och felhantera
+- Ska kunna läsa in autogiro-filer och felhantera
+- Ska kunna skicka uppgifter till autogiro direkt från registret
+- Ska kunna hantera fel vid inläsningen av ocr och autogiro
+
+3. LS-organisering
+(LS, ortsektion, styrelse, studier, organisatör, redaktör, anställd, etc)
+- LS och ortsektion
+- LS-styrelse plus andra styrelseuppdrag
+- Kommittéuppdrag
+- Har varit anställd i LS/centralt
+- Har gjort LS-tidning eller liknande
+- Aktivitetslista; vill delta på förhandling, blockad, demovakt, etc
+- innehar maskiner / fordon / körkort
+
+4. Arbetsplats- och branschorganisering
+- arbetsplats och arbetsuppgifter (ska kunna visa en lista ifall folk har flera jobb, samt studier/arbetslös/egen företagare).
+- Ifall man har flera arbetsplatser så är en prioriterad framför de andra, vår utgångspunkt är att man främst är aktiv och engagerad på en arbetsplats och ska tillhöra dess branschorganisationer.
+- medlem i driftsektion, syndikat, koncernfack, federation
+- antal anställda (1-10, 11-30, 31-99, 100- ) och kollektivavtal
+- andra fack på arbetsplatsen
+- stridsunderstöd
+- rättshjälp
+
+5. Kompetens, erfarenhet och utbildning
+- utbildningar (intro, grund, FO etc)
+- andra relevanta utbildningar utanför organisationen
+- uppdrag (vilka uppdrag man har eller har haft)
+
+- Organiseringskunskap som förhandla, organiserat strejk, föredrag, fest, 1 maj,
+- Föreningskunskap som ordförande, kassör, sekreterare, revisor, valberedning, registerhantering
+- Mediakunskap som att skriva, fotografera, layouta flygblad/annons/tidning, göra hemsidor, blogga, , intervjua, bildredigera, filma
+- Ledarerfarenheter som anställningsintervju, arbetsbeskrivningar, projektledare, arbetsleda, utvecklingssamtal,
+
+6. Automatik i systemet
+- automatiskt kalla nya medlemmar på kurs / intro – ska kunna ändras i LS
+- läsa in ocr/autogiro-filer
+- när en medlem kopplas till en befintlig arbetsplats ska uppgifter om federation, syndikat, koncernfack och driftsektion automagiskt kopplas till medlemmen. Alla som jobbar på en arbetsplats tillhör samma branschorganisationer och ändringar kan bara göras på samtliga.
+- när man skriver in nya medlemmar ska systemet automatiskt kunna skicka mail om detta till ansvarig för branschen i LS/Syndikat, introkommittén i LS och/eller branschansvarig LS-styrelse. Ifall det helt saknas ansvarig kontaktperson ska systemet påpeka detta.
